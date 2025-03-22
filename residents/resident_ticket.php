@@ -5,6 +5,10 @@ $WithEmployeeCSS = false;
 include 'sessions.php';
 include "../conn.php";
 
+// Firebase Credentials
+define("FIREBASE_API_KEY", "AIzaSyDXuS34OIspDbMFtYuU-DnRhwb3ilLNHts");
+define("FIREBASE_AUTH_URL", "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" . FIREBASE_API_KEY);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $user_id = trim($_POST["id"]);
@@ -22,14 +26,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // $insert_stmt->bind_param("isssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry);
     $insert_stmt->bind_param("isssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry);
 
-
     if ($insert_stmt->execute()) {
-        echo "<script>alert('Ticket created successfully!');</script>";
-        echo "<script>window.location.href='resident_ticket.php';</script>";
-    } else {
-        echo "<script>alert('Error: " . $conn->error . "');</script>";
-    }
+        // Fetch the resident's email
+        $email_query = "SELECT email FROM residents WHERE resident_id = ?";
+        $email_stmt = $conn->prepare($email_query);
+        $email_stmt->bind_param("s", $resident_id);
+        $email_stmt->execute();
+        $email_result = $email_stmt->get_result();
+
+        if ($email_result->num_rows > 0) {
+            $row = $email_result->fetch_assoc();
+            $resident_email = $row['email'];
+
+            $firebase_data = json_encode([
+                "requestType" => "PASSWORD_RESET",
+                "email" => $resident_email
+            ]);
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, FIREBASE_AUTH_URL);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $firebase_data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+
+            if ($http_code == 200) {
+                echo "<script>alert('Ticket created successfully! A confirmation link has been sent to $resident_email');</script>";
+            } else {
+                echo "<script>alert('Ticket created successfully! However, the confirmation link could not be sent.');</script>";
+            }
+           } else {
+               echo "<script>alert('Ticket created successfully! No email found for the given resident ID.');</script>";
+           }
+   
+           $email_stmt->close();
+   } else {
+       echo "<script>alert('Error: " . $conn->error . "');</script>";
+   }
     $insert_stmt->close();
+    echo "<script>window.location.href='resident_ticket.php';</script>";
 }
 
 $user_id = $_SESSION["resident_id"];
