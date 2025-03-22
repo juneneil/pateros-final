@@ -1,0 +1,161 @@
+body {
+  padding-top: 0;
+  background-image: url("images/PaterosMunicipal.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+  transition: margin-left 0.3s ease-in-out;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.pJustify {
+  text-align: justify;
+}
+
+.navbar {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(147deg, #164211, #329427, #164211);
+  animation: Gradient 5s ease infinite;
+  transition: all 0.2s ease-out;
+  font-family: sans-serif;
+}
+.navbar-light .navbar-brand {
+  color: #fff;
+}
+
+/* .navbar-light .navbar-brand :hover {
+  color: #007bff;
+} */
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: white;
+}
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+}
+
+/* Updated: February 18, 2025 */
+
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+  color: #007bff;
+}
+
+/* #profileNavbar {
+  position: fixed;
+  right: 0;
+  z-index: 1000;
+  margin-right: 14px;
+} */
+
+/* End */
+
+.menu-bar {
+  list-style-type: none;
+  padding: 0;
+  position: fixed;
+  top: 70px;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: left 0.3s ease-in-out;
+  background: linear-gradient(147deg, #164211, #329427, #164211);
+  animation: Gradient 5s ease infinite;
+  transition: all 0.2s ease-out;
+  font-family: sans-serif;
+  color: white;
+
+  margin-top: 16px;
+}
+.menu-bar li {
+  padding: 8px 12px;
+}
+.menu-bar li a {
+  text-decoration: none;
+  color: white;
+}
+.menu-bar li a :hover {
+  /* updated here: .menu-bar li a : hover */
+  color: #007bff;
+}
+.navbar-brand img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+.sidebar-toggle {
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+@media (max-width: 767px) {
+  .navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  #welcomeDashboard {
+    position: relative;
+  }
+  body {
+    position: absolute;
+    width: 100%;
+  }
+  .menu-bar {
+    width: 200px;
+    position: absolute;
+    top: 80px;
+    left: -200px;
+    width: auto;
+    height: 100%;
+  }
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-nav .nav-item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+  .navbar-nav .nav-item :first-child {
+    /* updated here: .nav-item : first-child */
+    order: -1;
+  }
+}
+.section-box {
+  background: linear-gradient(147deg, #164211, #329427, #164211);
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.section-title {
+  color: #007bff;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+.mb-4 {
+  margin-bottom: 30px;
+}
+.p-4 {
+  padding: 20px;
+}
+.rounded {
+  border-radius: 8px;
+}
+.shadow {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.container {
+  margin-top: 20px;
+}
