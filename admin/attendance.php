@@ -70,6 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="box">
             <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+              <form method="POST" class="form-inline" id="payForm">
+                <button type="button" class="btn btn-success btn-sm btn-flat" id="attendance_pdf"><span class="glyphicon glyphicon-print"></span> Attendance</button>
+              </form>
             </div>
             <div class="box-body">
               <div class="table-responsive">
@@ -146,6 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       var id = $(this).data('id');
       getRow(id);
     });
+
+    $('#attendance_pdf').click(function(e){
+      e.preventDefault();
+      $('#payForm').attr('action', 'attendance_pdf.php');
+      $('#payForm').submit();
+    });
+
   });
 
   function getRow(id){

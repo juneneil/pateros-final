@@ -69,7 +69,9 @@
                         <th>Sub Category</th>
                         <th>Booking Date</th>
                         <th>Reason for Inquiry</th>
+                        <th>Remarks</th>
                         <th>Created at</th>
+                        <th>Edit</th>
                   </thead>
                   <tbody>
                   <?php
@@ -84,7 +86,9 @@
                                 <td>".$row['sub_category']."</td>
                                 <td>".$row['booking_date']."</td>
                                 <td>".($row['reason_for_inquiry'])."</td>
+                                <td>".($row['remarks'])."</td>
                                 <td>".($row['created_at'])."</td>
+                                <td><button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['id'] . "'><i class='fa fa-edit'></i> Edit</button></td>
                             </tr>
                             ";
                         }
@@ -101,6 +105,7 @@
   </div>
 
   <?php include 'includes/footer.php'; ?>
+  <?php include 'includes/tickets_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?> 
 <script>
@@ -141,18 +146,22 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'position_row.php',
+    url: 'tickets_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('#posid').val(response.id);
-      $('#edit_title').val(response.description);
-      $('#edit_rate').val(response.rate);
-      $('#del_posid').val(response.id);
-      $('#del_position').html(response.description);
+      $('#edit_id').val(response.id);
+      $('#edit_remarks').val(response.remarks);
     }
   });
 }
+
+$(document).on('click', '.edit', function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    console.log("Clicked Edit for ID:", id); // Debugging
+    getRow(id);
+});
 
 
 </script>

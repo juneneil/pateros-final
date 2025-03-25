@@ -48,6 +48,9 @@
           <div class="box">
             <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+              <form method="POST" class="form-inline" id="payForm">
+                <button type="button" class="btn btn-success btn-sm btn-flat" id="employee_pdf"><span class="glyphicon glyphicon-print"></span> Employee</button>
+              </form>
             </div>
             <div class="box-body">
               <div style="overflow-x: auto;">
@@ -162,6 +165,13 @@ $(function(){
     $('#modalImage').attr('src', photoUrl); // Set the modal's image source
     $('#imageModal').modal('show'); // Show the modal
   });
+
+  $('#employee_pdf').click(function(e){
+      e.preventDefault();
+      $('#payForm').attr('action', 'employee_pdf.php');
+      $('#payForm').submit();
+    });
+
 });
 
 function getRow(id){

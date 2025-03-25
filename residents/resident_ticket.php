@@ -18,13 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // $booking_date = trim($_POST["booking_date"]);
     $booking_date = date('Y-m-d H:i:s', strtotime($_POST["booking_date"]));
     $reason_for_inquiry = trim($_POST["reason_for_inquiry"]);
+    $remarks = isset($_POST["remarks"]) && !empty($_POST["remarks"]) ? trim($_POST["remarks"]) : "Not Serve";
 
     // Insert the ticket data into the database
-    $insert_query = "INSERT INTO ticket (id, resident_id, category, sub_category, booking_date, reason_for_inquiry) 
-                     VALUES (?, ?, ?, ?, ?, ?)";
+    $insert_query = "INSERT INTO ticket (id, resident_id, category, sub_category, booking_date, reason_for_inquiry, remarks) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = $conn->prepare($insert_query);
     // $insert_stmt->bind_param("isssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry);
-    $insert_stmt->bind_param("isssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry);
+    $insert_stmt->bind_param("issssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry, $remarks);
 
     if ($insert_stmt->execute()) {
         // Fetch the resident's email
@@ -265,6 +266,21 @@ include 'header.php';
                         <input type="datetime-local" id="booking_date" name="booking_date" required>
                     </div>
 
+                    <script>
+                    document.getElementById("booking_date").addEventListener("change", function() {
+                        let inputDate = new Date(this.value);
+                        let hours = inputDate.getHours();
+                        let minutes = inputDate.getMinutes();
+
+                        if (hours < 7 || (hours === 16 && minutes > 0) || hours > 16) {
+                            alert("Error Message: Booking time must be between 7:00 AM and 4:00 PM (exactly 4:00 PM is allowed).");
+                            this.value = "";
+                        }
+                    });
+                    </script>
+
+
+
 
                     <div class="form-group text-dark">
                         <label for="reason_for_inquiry">Reason for Inquiry:</label>
@@ -291,6 +307,7 @@ include 'header.php';
                                 <th>Sub-Category</th>
                                 <th>Booking Date</th>
                                 <th>Reason for Inquiry</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -303,6 +320,7 @@ include 'header.php';
                                     <td>{$row['sub_category']}</td>
                                     <td>{$row['booking_date']}</td>
                                     <td>{$row['reason_for_inquiry']}</td>
+                                    <td>{$row['remarks']}</td>
                                     </tr>";
                                 }
                             } else {
