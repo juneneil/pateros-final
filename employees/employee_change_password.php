@@ -1,15 +1,17 @@
+ORIGINAL codes of employee_change_password.php
+
 <?php
 
 $pageTitle = "Change Password";
 $WithEmployeeCSS = True;
 session_start();
 if (!isset($_SESSION["user_id"])) {
-    header("Location: employeeLogin.php");
+    header("Location: index.php");
     exit();
 }
 $user_id = $_SESSION["user_id"];
 $current_password = $_SESSION["lastname"];
-include "conn.php";
+include "../conn.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["new_password"])) {
         $new_password = $_POST["new_password"];
@@ -138,6 +140,14 @@ button.btn-primary:active::after {
     border-radius: 10px;
     display: none;
     font-weight: bold;
+}
+
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38%;
 }
 
 </style>
@@ -275,7 +285,7 @@ document.getElementById('passwordForm').addEventListener('submit', function(even
 function startCountdown() {
     const countdownElement = document.getElementById("countdown");
     countdownElement.style.display = "block";
-    let countdown = 7;
+    let countdown = 3;
     
     const interval = setInterval(() => {
         countdownElement.textContent = countdown;
