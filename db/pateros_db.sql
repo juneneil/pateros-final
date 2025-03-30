@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2025 at 09:35 AM
+-- Generation Time: Mar 30, 2025 at 07:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,6 +34,7 @@ CREATE TABLE `admin` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `photo` varchar(200) NOT NULL,
+  `admin_title` varchar(20) NOT NULL,
   `created_on` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -41,8 +42,12 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES
-(1, 'admin', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Final', 'Boss', 'PaterosLogo.png', '2025-02-17');
+INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `admin_title`, `created_on`) VALUES
+(1, 'admin', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Final', 'Boss', 'PaterosLogo.png', 'Super Admin', '2025-02-17'),
+(2, 'admin2', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Civil', 'Registry', 'PaterosLogo.png', 'Civil Registry', '2025-02-17'),
+(3, 'admin3', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Business', 'Registration', 'PaterosLogo.png', 'Business Registratio', '2025-02-17'),
+(4, 'admin4', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Job', 'Opportunities', 'PaterosLogo.png', 'Job Opportunities', '2025-02-17'),
+(5, 'admin5', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'DS', 'WD', 'PaterosLogo.png', 'DSWD', '2025-02-17');
 
 -- --------------------------------------------------------
 
@@ -67,7 +72,33 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `created_at`, `picture`) VALUES
-(141, 45, '2025-03-22', '01:12:26', 1, '00:00:00', 0, '2025-03-21 17:12:26', 'uploads/INH879460321_1742577146.jpg');
+(141, 45, '2025-03-22', '01:12:26', 1, '00:00:00', 0, '2025-03-21 17:12:26', 'uploads/INH879460321_1742577146.jpg'),
+(142, 45, '2025-03-27', '03:28:44', 1, '03:29:38', 0, '2025-03-26 19:28:44', 'uploads/INH879460321_1743017378.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `callback`
+--
+
+CREATE TABLE `callback` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `callback`
+--
+
+INSERT INTO `callback` (`id`, `name`, `phone_number`, `email`, `message`, `created_at`) VALUES
+(1, 'asdasd', 'asdasas', 'asdasd@gmail.com', 'asdsad', '2025-03-30 17:10:33'),
+(2, 'asd', 'asd', 'asda@gmail.com', 'asdasd', '2025-03-30 17:11:05'),
+(3, 'asd', 'asd', 'asdasd@gmail.com', 'asdasd', '2025-03-30 17:11:17'),
+(4, 'asd', 'asd', 'asdasd@gmail.com', 'asdasd', '2025-03-30 17:11:30');
 
 -- --------------------------------------------------------
 
@@ -145,7 +176,7 @@ INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`
 (43, 'KAR047835261', 'oks2', 'nah2', 'daw', '2024-12-24', '012312312312321', 'Male', 1, 1, 'ano3.jpg', '2024-12-08', 'oksnah2@gmail.com', 'qwertyu', 1),
 (45, 'INH879460321', 'oks4', 'nah4', 'daw', '2024-12-24', '012312312312321', 'Male', 1, 1, 'ano4.jpg', '2024-12-08', 'employee@gmail.com', 'password', 1),
 (48, 'XLT095126483', 'gg', 'gg', 'gg', '2025-03-18', '22', 'Male', 1, 1, 'ano2.jpg', '2025-03-02', 'gg@gmail.com', 'gg', 0),
-(49, 'CPA439256108', 'kkk', 'kkk', 'kkk', '2025-03-17', '012312312312321', 'Male', 1, 1, 'image6.jpeg', '2025-03-25', 'kkk@gmail.com', 'kkk1', 1);
+(49, 'CPA439256108', 'kkk', 'kkk', 'kkk', '2025-03-17', '012312312312321', 'Male', 1, 1, 'image6.jpeg', '2025-03-25', 'kkk@gmail.com', 'kkk1', 0);
 
 -- --------------------------------------------------------
 
@@ -220,6 +251,7 @@ CREATE TABLE `residents` (
   `birthdate` date NOT NULL,
   `contact_info` varchar(100) NOT NULL,
   `gender` varchar(10) NOT NULL,
+  `photo_type` varchar(20) NOT NULL,
   `photo` varchar(200) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -230,11 +262,15 @@ CREATE TABLE `residents` (
 -- Dumping data for table `residents`
 --
 
-INSERT INTO `residents` (`id`, `resident_id`, `firstname`, `lastname`, `age`, `address`, `birthdate`, `contact_info`, `gender`, `photo`, `email`, `password`, `created_on`) VALUES
-(4, 'IGK216473805', 'cc', 'cc', '22', 'cc', '2025-03-05', '22', 'Female', 'ano2.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
-(5, 'DZC267051394', 'ccss', 'ccss', '22', 'ccss', '2025-03-05', '22', 'Female', 'ano3.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
-(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', 'ano4.jpg', 'resident@gmail.com', 'password', '2025-03-01 16:01:22'),
-(11, 'JAN594722893', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-22', '09389771409', 'male', 'image6.jpeg', 'magnanaojuneneil@gmail.com', 'june123', '2025-03-22 05:36:11');
+INSERT INTO `residents` (`id`, `resident_id`, `firstname`, `lastname`, `age`, `address`, `birthdate`, `contact_info`, `gender`, `photo_type`, `photo`, `email`, `password`, `created_on`) VALUES
+(4, 'IGK216473805', 'cc', 'cc', '22', 'cc', '2025-03-05', '22', 'Female', '', 'ano2.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
+(5, 'DZC267051394', 'ccss', 'ccss', '22', 'ccss', '2025-03-05', '22', 'Female', '', 'ano3.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
+(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', '', 'ano4.jpg', 'resident@gmail.com', 'password', '2025-03-01 16:01:22'),
+(11, 'JAN594722893', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-22', '09389771409', 'male', '', 'image6.jpeg', 'magnanaojuneneil@gmail.com', 'june123', '2025-03-22 05:36:11'),
+(12, 'EXM830986653', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-25', '09389771409', 'male', '', 'image6.jpeg', 'noviepilarlabanero@gmail.com', 'june123', '2025-03-25 12:48:58'),
+(13, 'XUQ178969110', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-31', '09389771409', 'male', 'license', 'image6.jpeg', 'junesz@gmail.com', 'juneneil123', '2025-03-30 10:07:18'),
+(14, 'BPJ298249556', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-04-01', '09389771409', 'male', 'license', 'image6.jpeg', 'juneb@gmail.com', 'juneneil123', '2025-03-30 10:08:10'),
+(15, 'REN493513099', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-31', '09389771409', 'male', 'PWD ID', 'image6.jpeg', 'juneneilsiaomagnanao123@gmail.com', 'juneneil123', '2025-03-30 10:09:44');
 
 -- --------------------------------------------------------
 
@@ -325,6 +361,12 @@ ALTER TABLE `attendance`
   ADD KEY `fk_employee_id` (`employee_id`);
 
 --
+-- Indexes for table `callback`
+--
+ALTER TABLE `callback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cashadvance`
 --
 ALTER TABLE `cashadvance`
@@ -387,13 +429,19 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+
+--
+-- AUTO_INCREMENT for table `callback`
+--
+ALTER TABLE `callback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
@@ -435,7 +483,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `residents`
 --
 ALTER TABLE `residents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `schedules`
