@@ -19,6 +19,7 @@ if (isset($_POST["register"])) {
     $birthdate = $_POST["birthdate"];
     $contact = trim($_POST["contact_info"]);
     $gender = trim($_POST["gender"]);
+    $photo_type = trim($_POST["photo_type"]);
     $age = trim($_POST["age"]);
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
@@ -90,6 +91,7 @@ if (isset($_POST["register"])) {
             "birthdate" => $birthdate,
             "contact_info" => $contact,
             "gender" => $gender,
+            "photo_type" => $photo_type,
             "age" => $age,
             "photo" => $photo_url,
             "email" => $email,
@@ -105,8 +107,8 @@ if (isset($_POST["register"])) {
         curl_close($db_ch);
 
         // Insert into MySQL Database
-        $sql = "INSERT INTO residents (resident_id, firstname, lastname, address, birthdate, contact_info, gender, age, photo, created_on, email, password) 
-                VALUES ('$resident_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$age', '$filename', NOW(), '$email', '$password')";
+        $sql = "INSERT INTO residents (resident_id, firstname, lastname, address, birthdate, contact_info, gender, photo_type, age, photo, created_on, email, password) 
+                VALUES ('$resident_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$photo_type', '$age', '$filename', NOW(), '$email', '$password')";
         
         if ($conn->query($sql)) {
             $_SESSION["success"] = "Resident added successfully! Verification email sent.";
@@ -146,9 +148,9 @@ body {
     padding-top: 0;
     background-image: url("images/PaterosMunicipal.jpg");
     background-repeat: no-repeat;
-    background-size: cover; /* Ensures the image covers the entire screen */
-    background-position: center; /* Centers the image */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -333,10 +335,29 @@ div.alert.alert-success {
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-                    <label for="photo">Upload Photo</label>
+                    <!-- <label for="photo">Upload Photo</label>
                     <div>
                     <input type="file" id="photo" name="photo" accept="image/*">
-                    </div>
+                    </div> -->
+
+                    <label for="photo_type">Select Type of ID</label>
+                    <select id="photo_type" name="photo_type" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Passport">Passport</option>
+                        <option value="License">License</option>
+                        <option value="PhilID">PhilID</option>
+                        <option value="Sr. Citizen ID">Sr. Citizen ID</option>
+                        <option value="GSIS">GSIS</option>
+                        <option value="PRC ID">PRC ID</option>
+                        <option value="Voter’s ID">Voter’s ID</option>
+                        <option value="Postal ID">Postal ID</option>
+                        <option value="PWD ID">PWD ID</option>
+                        <option value="SSS">SSS</option>
+                    </select>
+
+                    <label for="photo">Upload Photo</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
+
                     <input type="submit" name="register" value="Create Account">
                 </center>
             </form>

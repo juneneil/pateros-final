@@ -105,12 +105,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                               <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
                               <td>";
-                          if (!empty($row['picture'])) {
-                              echo "<img src='../employees/" . $row['picture'] . "' alt='Employee Picture' width='50' height='50' class='img-circle'>";
-                          } else {
-                              echo "N/A";
-                          }
-                          echo "</td>
+                              if (!empty($row['picture'])) {
+                                  echo "<a href='#' class='photo' data-photo='../employees/" . $row['picture'] . "' data-firstname='" . $row['firstname'] . "'>
+                                          <img src='../employees/" . $row['picture'] . "' alt='Employee Picture' width='50' height='50' class='img-circle'>
+                                        </a>
+                                        &nbsp;
+                                        <button class='btn btn-info btn-sm photo' 
+                                            data-photo='../employees/" . $row['picture'] . "' 
+                                            data-firstname='" . $row['firstname'] . "'>
+                                            <i class='fa fa-eye'></i>
+                                        </button>";
+                              } else {
+                                  echo "N/A";
+                              }
+                              echo "</td>
                               <td>
                                 <button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['attid'] . "'><i class='fa fa-edit'></i> Edit</button>
                               </td>
@@ -130,6 +138,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </section>   
   </div>
+
+  <!-- jQuery & Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Custom Modal Script -->
+<script src="modal_script.js"></script>
+
+
+  <script>
+//     $(document).ready(function() {
+//     // When an image or eye icon is clicked
+//     $('.photo').click(function() {
+//         var imageUrl = $(this).data('photo'); // Get image URL
+//         var firstName = $(this).data('firstname'); // Get employee first name
+
+//         // Update modal elements
+//         $('#modalImage').attr('src', imageUrl);
+//         $('#employeeFirstName').text(firstName);
+
+//         // Show modal
+//         $('#imageModal').modal('show');
+//     });
+// });
+
+$(document).ready(function() {
+    $('.photo').click(function() {
+        var imageUrl = $(this).data('photo'); 
+        var firstName = $(this).data('firstname'); 
+
+        $('#modalImage').attr('src', imageUrl);
+        $('#employeeFirstName').text(firstName);
+
+        $('#imageModal').modal('show');
+    });
+});
+
+  </script>
+
+  <!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="imageModalLabel">Employee Photo: <span id="employeeFirstName"></span></h5>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" id="modalImage" class="img-fluid" alt="Employee Photo" style="width: 60%; height: 410px; cursor: pointer;">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/attendance_modal.php'; ?>
   </div>

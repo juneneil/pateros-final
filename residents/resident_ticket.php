@@ -88,7 +88,7 @@ $totalRow = $totalResult->fetch_assoc();
 $totalTickets = $totalRow['total'];
 $totalPages = ceil($totalTickets / $perPage);
 
-$fetch_tickets_query = "SELECT id, category, sub_category, booking_date,  reason_for_inquiry 
+$fetch_tickets_query = "SELECT id, category, sub_category, booking_date,  reason_for_inquiry, remarks 
                         FROM ticket WHERE resident_id = ? LIMIT ?, ?";
 $stmt = $conn->prepare($fetch_tickets_query);
 $stmt->bind_param('sii', $_SESSION['resident_id'], $offset, $perPage);
@@ -261,7 +261,7 @@ include 'header.php';
                     </div>
 
                     <!-- Booking Date and Time -->
-                    <div class="form-group text-dark">
+                    <!-- <div class="form-group text-dark">
                         <label for="booking_date"><b>Booking Date & Time:</b></label><br>
                         <input type="datetime-local" id="booking_date" name="booking_date" required>
                     </div>
@@ -277,10 +277,37 @@ include 'header.php';
                             this.value = "";
                         }
                     });
+                    </script> -->
+
+                    <!-- Booking Date and Time -->
+                    <div class="form-group text-dark">
+                        <label for="booking_date"><b>Booking Date & Time:</b></label><br>
+                        <input type="datetime-local" id="booking_date" name="booking_date" required>
+                    </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            let bookingInput = document.getElementById("booking_date");
+                            let now = new Date();
+                            
+                            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                            bookingInput.min = now.toISOString().slice(0, 16);
+                            bookingInput.addEventListener("change", function () {
+                                let inputDate = new Date(this.value);
+                                let currentDate = new Date();
+                                let hours = inputDate.getHours();
+                                let minutes = inputDate.getMinutes();
+
+                                if (inputDate < currentDate) {
+                                    alert("Error: You cannot select a past date.");
+                                    this.value = "";
+                                } else if (hours < 7 || (hours === 16 && minutes > 0) || hours > 16) {
+                                    alert("Error: Booking time must be between 7:00 AM and 4:00 PM.");
+                                    this.value = "";
+                                }
+                            });
+                        });
                     </script>
-
-
-
 
                     <div class="form-group text-dark">
                         <label for="reason_for_inquiry">Reason for Inquiry:</label>
