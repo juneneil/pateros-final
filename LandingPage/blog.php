@@ -7,7 +7,10 @@
         Latest Blog
         </h2>
         <p>
-        iusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n
+        Pateros, a vibrant town nestled between Taguig and Makati, is full of stories waiting to be told. 
+        Known for its rich cultural heritage and unique traditions, Pateros has been embracing modern 
+        changes while staying connected to its roots. Whether it's through local food, festivals, or community-driven initiatives, 
+        Pateros is a place where history meets the future.
         </p>
     </div>
     </div>
@@ -16,7 +19,7 @@
     <div class="col-md-6 pl-0">
     <div class="box b1">
         <div class="img-box">
-        <img src="LandingPage/images/b1.jpg" alt="">
+        <img src="LandingPage/images/pateros-image-6.jpg" alt="">
         </div>
         <div class="row">
         <div class="col-lg-8 col-md-10 ml-auto">
@@ -28,11 +31,11 @@
                 </h6>
             </div>
             <h3>
-                Boxer Joniya Daro
+            Food to try in Pateros
             </h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            </p>
+            <!-- <p>
+            Hello World
+            </p> -->
             <a href="">
                 Read More
             </a>
@@ -44,7 +47,7 @@
     <div class="col-md-6 pr-0">
     <div class="box b2">
         <div class="img-box">
-        <img src="LandingPage/images/b2.jpg" alt="">
+        <img src="LandingPage/images/pateros-image-3.jpg" alt="">
         </div>
         <div class="row">
         <div class="col-lg-8 col-md-10 mr-auto">
@@ -56,11 +59,11 @@
                 </h6>
             </div>
             <h3>
-                Boxer Joniya Daro
+            Fiesta of Pateros
             </h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            </p>
+            <!-- <p>
+            Hello World
+            </p> -->
             <a href="">
                 Read More
             </a>

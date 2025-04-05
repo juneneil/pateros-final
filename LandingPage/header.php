@@ -10,19 +10,19 @@
             <li class="">
                 <a class="" href="">
                 <img src="LandingPage/images/telephone.png" alt="" />
-                <span>09194534875</span>
+                <span>09070841954</span>
                 </a>
             </li>
             <li class="">
                 <a class="" href="">
                 <img src="LandingPage/images/mail.png" alt="" />
-                <span>paterosmunicipal@gmail.com</span>
+                <span>pateros.it@gmail.com</span>
                 </a>
             </li>
             <li class="">
                 <a class="" href="">
                 <img src="LandingPage/images/location.png" alt="" />
-                <span>Baranggay Pateros</span>
+                <span>Municipality of Pateros</span>
                 </a>
             </li>
             </ul>

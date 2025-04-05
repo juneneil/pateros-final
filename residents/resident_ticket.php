@@ -2,7 +2,7 @@
 $pageTitle = "Resident Ticket";
 $WithoutEmployeeCSS = true;
 $WithEmployeeCSS = false;
-include 'sessions.php';
+// include 'sessions.php';
 include "../conn.php";
 
 // Firebase Credentials

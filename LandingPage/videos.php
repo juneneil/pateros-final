@@ -10,8 +10,8 @@
                 Videos
                 </h2>
                 <p>
-                iusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n
-                ostrud exercitation ullamco laboris iusmod tempor incididunt ut labore et dolore
+                Pateros, a town in Metro Manila, Philippines, has a rich cultural heritage, 
+                and videos showcasing its landmarks, events, and local stories provide a unique insight into the lives of its residents.
                 </p>
             </div>
             </div>
@@ -21,15 +21,47 @@
             <div class="item">
                 <div class="box">
                 <div class="img-box">
-                    <img src="LandingPage/images/c1.jpg" alt="">
-                    <div class="detail-box">
+                    <!-- <img src="LandingPage/images/pateros-video-1.mp4" alt=""> -->
+                    <video width="100%" height="500px" controls>
+                        <source src="LandingPage/images/pateros-video-1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <div class="detail-box">
+                        <video width="100%" height="500px" controls>
+                            <source src="LandingPage/images/pateros-video-1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button>
+                            <img src="LandingPage/images/play-icon.png" alt="">
+                        </button>
+                        <h2>
+                            Boxing
+                        </h2>
+                    </div> -->
+                    </div>
+                <div class="btn-box">
+                    <a href="">
+                    See More
+                    </a>
+                </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="box">
+                <div class="img-box">
+                    <!-- <img src="LandingPage/images/c2.jpg" alt=""> -->
+                    <video width="100%" height="500px" controls>
+                        <source src="LandingPage/images/pateros-video-2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <div class="detail-box">
                     <button>
                         <img src="LandingPage/images/play-icon.png" alt="">
                     </button>
                     <h2>
                         Boxing
                     </h2>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="btn-box">
                     <a href="">
@@ -41,15 +73,19 @@
             <div class="item">
                 <div class="box">
                 <div class="img-box">
-                    <img src="LandingPage/images/c2.jpg" alt="">
-                    <div class="detail-box">
+                    <!-- <img src="LandingPage/images/c1.jpg" alt=""> -->
+                    <video width="100%" height="500px" controls>
+                        <source src="LandingPage/images/pateros-video-1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <div class="detail-box">
                     <button>
                         <img src="LandingPage/images/play-icon.png" alt="">
                     </button>
                     <h2>
                         Boxing
                     </h2>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="btn-box">
                     <a href="">
@@ -61,36 +97,20 @@
             <div class="item">
                 <div class="box">
                 <div class="img-box">
-                    <img src="LandingPage/images/c1.jpg" alt="">
-                    <div class="detail-box">
-                    <button>
-                        <img src="LandingPage/images/play-icon.png" alt="">
-                    </button>
-                    <h2>
-                        Boxing
-                    </h2>
-                    </div>
-                </div>
-                <div class="btn-box">
-                    <a href="">
-                    See More
-                    </a>
-                </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="box">
-                <div class="img-box">
-                    <img src="LandingPage/images/c2.jpg" alt="">
-                    <div class="detail-box">
-                    <button>
-                        <img src="LandingPage/images/play-icon.png" alt="">
-                    </button>
-                    <h2>
-                        Boxing
-                    </h2>
-                    </div>
-                </div>
+                    <!-- <img src="LandingPage/images/c2.jpg" alt=""> -->
+                    <video width="100%" height="500px" controls>
+                        <source src="LandingPage/images/pateros-video-2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <div class="detail-box">
+                        <button>
+                            <img src="LandingPage/images/play-icon.png" alt="">
+                        </button>
+                        <h2>
+                            Boxing
+                        </h2>
+                        </div>
+                    </div> -->
                 <div class="btn-box">
                     <a href="">
                     See More

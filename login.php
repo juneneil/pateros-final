@@ -2,7 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-session_start();
 include "conn.php";
 
 define("FIREBASE_API_KEY", "AIzaSyDXuS34OIspDbMFtYuU-DnRhwb3ilLNHts");
@@ -93,7 +92,38 @@ include 'header.php';
             <img src="images/PaterosMunicipal.jpg" alt="Pateros Building">
         </div>
         <div class="login-container">
-            <a href="index.php">Back</a>
+            <style>
+                .back-btn {
+                display: inline-block;
+                padding: 0.8em 1.5em;
+                background-color: rgb(30, 144, 255);
+                color: white;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 1rem;
+                border-radius: 0.5em;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                max-width: 20%;
+                text-align: center;
+                white-space: nowrap;
+                }
+
+                .back-btn:hover {
+                background-color: rgb(0, 123, 255);
+                transform: translateY(-2px);
+                }
+
+                @media (max-width: 600px) {
+                .back-btn {
+                    display: block;
+                    margin: 1em auto;
+                    width: 80%;
+                    font-size: 1.1rem;
+                }
+                }
+            </style>
+        <a href="index.php" class="back-btn">← Back</a>
             <center>
             <h1>Residents Login</h1>
             </center>

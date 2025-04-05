@@ -57,7 +57,7 @@ body {
 /*header section*/
 .hero_area {
   height: 100vh;
-  background-image: url(../images/hero-bg.jpg);
+  background-image: url(../images/pateros-image-8.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -443,7 +443,7 @@ a:focus {
 
 .about_section .about_container {
   padding: 45px;
-  background-image: url(../images/about-bg.jpg);
+  background-image: url(../images/pateros-image-13.jpg);
   background-size: cover;
 }
 
@@ -667,6 +667,7 @@ a:focus {
 
 .blog_section .box .img-box img {
   width: 100%;
+  height: 600px;
 }
 
 .blog_section .box .detail-box {

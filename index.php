@@ -1,47 +1,32 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
-  <title>Pateros Municipality</title>
-
-  <!-- slider stylesheet -->
+  <title>Home - Pateros Municipality</title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="LandingPage/css/bootstrap.css" />
-
-  <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
-  <!-- Custom styles for this template -->
   <link href="LandingPage/css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
   <link href="LandingPage/css/responsive.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="images/PaterosLogo.png">
 </head>
 
 <body>
   <div class="hero_area">
     <?php include "LandingPage/header.php"; ?>
-    <?php include "LandingPage/navbar.php"; ?>
-    <!-- end header section -->
-    <!-- slider section -->
     <section class=" slider_section position-relative">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-2 offset-md-2">
             <div class="slider_heading">
-              <h2>
+              <!-- <h2>
                 Bo <span>xer</span>
-              </h2>
+              </h2> -->
             </div>
           </div>
           <div class="col-md-8 mx-auto">
@@ -124,15 +109,12 @@
           </div>
         </div>
       </div>
-
     </section>
-    <!-- end slider section -->
   </div>
+
   <?php include "LandingPage/about.php"; ?>
   <?php include "LandingPage/videos.php"; ?>
   <?php include "LandingPage/blog.php"; ?>
-
-  <!-- client section -->
 
   <section class="client_section layout_padding-bottom">
     <div class="container-fluid">
@@ -141,10 +123,12 @@
           <div class="client_container">
             <div class="heading_container">
               <h2>
-                What Says Our students
+                What Other People Says
               </h2>
               <p>
-                iusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis n
+              Pateros may be tucked away between the hustle and bustle of Taguig and Makati, but it offers a unique charm. 
+              From the tranquil streets to the welcoming people, it's a refreshing escape from the fast-paced city life. 
+              It’s a place where heritage and modernity coexist beautifully.
               </p>
             </div>
             <div class="client_box-container">
@@ -153,14 +137,24 @@
                   <div class="item">
                     <div class="box">
                       <div class="img-box">
-                        <img src="LandingPage/images/client1.png" alt="" />
+                        <img src="LandingPage/images/pateros-image-16.jpg" alt="" height="120" style="border-radius: 50%"/>
                       </div>
                       <div class="detail-box">
                         <h4>
-                          Jone Moe
+                        Chevily Reyes
                         </h4>
-                        <p>
-                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum </p>
+                        <p style="text-align: justify;">
+                        She Knew Nothing About Anti-Smoking and Anti-Vaping Laws at First… Now She's Leading the Fight in Pateros
+                        <br><br>
+                        On the fourth day of our weeklong Women's Month Celebration, 
+                        we celebrate the inspiring journey of Dr. Chevily Reyes. She is a dentist, 
+                        mother, and the tobacco control focal person for Pateros.
+                        <br><br>
+                        #WomensMonthCelebration2025
+                        #WomensHistoryMonth
+                        #womenforasmokefreefuture
+                        #SmokeFreeVapeFreeNOW
+                        </p>
                         <img src="LandingPage/images/quote.png" alt="" />
                       </div>
                     </div>
@@ -168,44 +162,22 @@
                   <div class="item">
                     <div class="box">
                       <div class="img-box">
-                        <img src="LandingPage/images/client2.png" alt="" />
+                        <img src="LandingPage/images/pateros-image-15.jpg" alt="" height="120" style="border-radius: 50%"/>
                       </div>
                       <div class="detail-box">
                         <h4>
-                          Lio Uji
+                        Vlogger: Becoming a Filipino
                         </h4>
-                        <p>
-                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum </p>
-                        <img src="LandingPage/images/quote.png" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="box">
-                      <div class="img-box">
-                        <img src="LandingPage/images/client1.png" alt="" />
-                      </div>
-                      <div class="detail-box">
-                        <h4>
-                          Jone Moe
-                        </h4>
-                        <p>
-                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum </p>
-                        <img src="LandingPage/images/quote.png" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="box">
-                      <div class="img-box">
-                        <img src="LandingPage/images/client2.png" alt="" />
-                      </div>
-                      <div class="detail-box">
-                        <h4>
-                          Lio Uji
-                        </h4>
-                        <p>
-                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum </p>
+                        <p style="text-align: justify;">
+                        What a wonderful first experience taking a walk through Pateros.  
+                        This little municipality is tucked between Taguig and Makati, 
+                        and unlike those two cities, doesn't have big skyscrapers.<br><br>
+                        Instead, you will find streets lined with various styles of house... 
+                        some look very ancestral!  And don't be surprised if some of those houses 
+                        have little balut and salted egg stands outside of them.  Yup, you can spot those everywhere!  
+                        This town in Metro Manila is famous for its balut and eggs!  I saw a few little duck ornaments 
+                        statues and even the emblem of a duck and eggs on the municipal hall.
+                        </p>
                         <img src="LandingPage/images/quote.png" alt="" />
                       </div>
                     </div>
@@ -219,9 +191,6 @@
     </div>
   </section>
 
-  <!-- end client section -->
-
-  <!-- info section -->
   <div class="info_section">
     <div class="container-fluid">
       <div class="row">
@@ -233,7 +202,7 @@
             </div>
             <div class="col-md-6  px-0">
               <div class="img-box">
-                <img src="LandingPage/images/footer-img.jpg" alt="">
+                <img src="LandingPage/images/pateros-image-13.jpg" alt="">
               </div>
             </div>
           </div>
@@ -241,7 +210,6 @@
       </div>
     </div>
   </div>
-  <!-- end info section -->
 
   <script type="text/javascript" src="LandingPage/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="LandingPage/js/bootstrap.js"></script>
@@ -255,7 +223,6 @@
     }
   </script>
 
-  <!-- owl carousel script -->
   <script type="text/javascript">
     $(".owl-carousel").owlCarousel({
       loop: true,
@@ -298,24 +265,7 @@
       }
     });
   </script>
-  <!-- end owl carousel script -->
-
-  <script>
-    /** google_map js **/
-
-    function myMap() {
-      var mapProp = {
-        center: new google.maps.LatLng(40.712775, -74.005973),
-        zoom: 18,
-      };
-      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-    }
-  </script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
-
-
+  <?php include "LandingPage/map.php"; ?>
 </body>
 
 </html>

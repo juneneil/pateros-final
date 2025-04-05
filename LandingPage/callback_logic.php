@@ -13,6 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->execute()) {
             echo "Data inserted successfully.";
+            header("Location: index.php?status=success");
+            exit();
         } else {
             echo "Error: " . $stmt->error;
         }

@@ -1,5 +1,5 @@
 <section class=" footer_section ">
-<div class="social_box">
+<!-- <div class="social_box">
     <a href="#">
     <img src="LandingPage/images/facebook.png" alt="">
     </a>
@@ -15,8 +15,8 @@
     <a href="#">
     <img src="LandingPage/images/youtube.png" alt="">
     </a>
-</div>
+</div> -->
 <p>
-    &copy; Copyright © 2024 Pateros Municipality
+    &copy; Copyright © 2025 Pateros Municipality
 </p>
 </section>
