@@ -19,13 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $booking_date = date('Y-m-d H:i:s', strtotime($_POST["booking_date"]));
     $reason_for_inquiry = trim($_POST["reason_for_inquiry"]);
     $remarks = isset($_POST["remarks"]) && !empty($_POST["remarks"]) ? trim($_POST["remarks"]) : "Not Serve";
+    $approval = isset($_POST["approval"]) && !empty($_POST["approval"]) ? trim($_POST["approval"]) : "Not Approved";
 
     // Insert the ticket data into the database
-    $insert_query = "INSERT INTO ticket (id, resident_id, category, sub_category, booking_date, reason_for_inquiry, remarks) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $insert_query = "INSERT INTO ticket (id, resident_id, category, sub_category, booking_date, reason_for_inquiry, remarks, approval) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = $conn->prepare($insert_query);
     // $insert_stmt->bind_param("isssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry);
-    $insert_stmt->bind_param("issssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry, $remarks);
+    $insert_stmt->bind_param("isssssss", $user_id, $resident_id, $category, $sub_category, $booking_date, $reason_for_inquiry, $remarks, $approval);
 
     if ($insert_stmt->execute()) {
         // Fetch the resident's email
@@ -88,7 +89,7 @@ $totalRow = $totalResult->fetch_assoc();
 $totalTickets = $totalRow['total'];
 $totalPages = ceil($totalTickets / $perPage);
 
-$fetch_tickets_query = "SELECT id, category, sub_category, booking_date,  reason_for_inquiry, remarks 
+$fetch_tickets_query = "SELECT id, category, sub_category, booking_date,  reason_for_inquiry, remarks, approval 
                         FROM ticket WHERE resident_id = ? LIMIT ?, ?";
 $stmt = $conn->prepare($fetch_tickets_query);
 $stmt->bind_param('sii', $_SESSION['resident_id'], $offset, $perPage);
@@ -335,6 +336,7 @@ include 'header.php';
                                 <th>Booking Date</th>
                                 <th>Reason for Inquiry</th>
                                 <th>Remarks</th>
+                                <th>Approval</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -348,6 +350,7 @@ include 'header.php';
                                     <td>{$row['booking_date']}</td>
                                     <td>{$row['reason_for_inquiry']}</td>
                                     <td>{$row['remarks']}</td>
+                                    <td>{$row['approval']}</td>
                                     </tr>";
                                 }
                             } else {

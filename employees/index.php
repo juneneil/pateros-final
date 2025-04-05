@@ -1,4 +1,50 @@
 <?php
+// session_start();
+// session_unset();
+// session_destroy();
+// session_start();
+// include "../conn.php";
+// $pageTitle = "Employee Login";
+// $WithEmployeeCSS = True;
+// if (isset($_POST["login"])) {
+//     $email = $_POST["email"];
+//     $password = $_POST["password"];
+//     if (!empty($email) && !empty($password)) {
+//         $sql = "SELECT * FROM employees WHERE email = ? LIMIT 1";
+//         $stmt = $conn->prepare($sql);
+//         $stmt->bind_param("s", $email);
+//         $stmt->execute();
+//         $result = $stmt->get_result();
+//         if ($result->num_rows > 0) {
+//             $user = $result->fetch_assoc();
+//             if ($password == $user["password"]) {
+//                 $_SESSION["user_id"] = $user["id"];
+//                 $_SESSION["employee_id"] = $user["employee_id"];
+//                 $_SESSION["email"] = $user["email"];
+//                 $_SESSION["firstname"] = $user["firstname"];
+//                 $_SESSION["lastname"] = $user["lastname"];
+//                 $_SESSION["position"] = $user["position"];
+//                 $_SESSION["success"] = "Login successful!";
+//                 if ($user["password"] == $user["lastname"]) {
+//                     header("Location: employee_change_password.php");
+//                     exit();
+//                 } else {
+//                     header("Location: employee_home.php");
+//                     exit();
+//                 }
+//             } else {
+//                 $_SESSION["error"] = "Invalid password";
+//             }
+//         } else {
+//             $_SESSION["error"] = "User not found";
+//         }
+//     } else {
+//         $_SESSION["error"] = "Please fill in both fields";
+//     }
+// }
+// include 'header.php';
+?>
+<?php
 session_start();
 session_unset();
 session_destroy();
@@ -18,6 +64,11 @@ if (isset($_POST["login"])) {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             if ($password == $user["password"]) {
+                $hashed_password = md5($password);
+                $update_sql = "UPDATE employees SET password = ? WHERE id = ?";
+                $update_stmt = $conn->prepare($update_sql);
+                $update_stmt->bind_param("si", $hashed_password, $user["id"]);
+                $update_stmt->execute();
                 $_SESSION["user_id"] = $user["id"];
                 $_SESSION["employee_id"] = $user["employee_id"];
                 $_SESSION["email"] = $user["email"];
@@ -33,7 +84,20 @@ if (isset($_POST["login"])) {
                     exit();
                 }
             } else {
-                $_SESSION["error"] = "Invalid password";
+                $hashed_password = md5($password);
+                if ($hashed_password == $user["password"]) {
+                    $_SESSION["user_id"] = $user["id"];
+                    $_SESSION["employee_id"] = $user["employee_id"];
+                    $_SESSION["email"] = $user["email"];
+                    $_SESSION["firstname"] = $user["firstname"];
+                    $_SESSION["lastname"] = $user["lastname"];
+                    $_SESSION["position"] = $user["position"];
+                    $_SESSION["success"] = "Login successful!";
+                    header("Location: employee_home.php");
+                    exit();
+                } else {
+                    $_SESSION["error"] = "Invalid password";
+                }
             }
         } else {
             $_SESSION["error"] = "User not found";

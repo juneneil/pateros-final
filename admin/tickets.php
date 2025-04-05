@@ -3,6 +3,7 @@
   include 'timezone.php';
   $range_to = date('m/d/Y');
   $range_from = date('m/d/Y', strtotime('-30 day', strtotime($range_to)));
+  $_SESSION['id'] = $user['id'];
 ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -70,29 +71,47 @@
                         <th>Booking Date</th>
                         <th>Reason for Inquiry</th>
                         <th>Remarks</th>
+                        <th>Approval</th>
                         <th>Created at</th>
                         <th>Edit</th>
+                        <th>Edit Approval</th>
                   </thead>
                   <tbody>
                   <?php
-                        $sql = "SELECT * FROM ticket";
-                        $query = $conn->query($sql);
-                        while($row = $query->fetch_assoc()){
-                            echo "
-                            <tr>
-                                <td>".$row['id']."</td>
-                                <td>".$row['resident_id']."</td>
-                                <td>".($row['category'])."</td>
-                                <td>".$row['sub_category']."</td>
-                                <td>".$row['booking_date']."</td>
-                                <td>".($row['reason_for_inquiry'])."</td>
-                                <td>".($row['remarks'])."</td>
-                                <td>".($row['created_at'])."</td>
-                                <td><button class='btn btn-success btn-sm btn-flat edit' data-id='" . $row['id'] . "'><i class='fa fa-edit'></i> Edit</button></td>
-                            </tr>
-                            ";
-                        }
-                    ?>
+                    $sql = "SELECT * FROM ticket";
+                    $query = $conn->query($sql);
+                    while($row = $query->fetch_assoc()){
+                      echo "<tr>";
+                      echo "<td>".$row['id']."</td>";
+                      echo "<td>".$row['resident_id']."</td>";
+                      echo "<td>".$row['category']."</td>";
+                      echo "<td>".$row['sub_category']."</td>";
+                      echo "<td>".$row['booking_date']."</td>";
+                      echo "<td>".$row['reason_for_inquiry']."</td>";
+                      echo "<td>".$row['remarks']."</td>";
+                      echo "<td>".$row['approval']."</td>";
+                      echo "<td>".$row['created_at']."</td>";
+                      echo "<td><button class='btn btn-success btn-sm btn-flat edit' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button></td>";
+
+                      $categoryAccess = [
+                        'Civil Registry' => 2,
+                        'Business Registration' => 3,
+                        'Job Opportunities' => 4,
+                        'DSWD' => 5
+                      ];
+                      
+                      $currentUserId = $_SESSION['id'];
+                      $assignedApprover = $categoryAccess[$row['category']] ?? null;
+                      
+                      if ($currentUserId == 1 || $currentUserId == $assignedApprover) {
+                          echo "<td><button class='btn btn-success btn-sm btn-flat approval' data-id='".$row['id']."'><i class='fa fa-edit'></i> Approval</button></td>";
+                      } else {
+                          echo "<td><button class='btn btn-default btn-sm btn-flat' disabled><i class='fa fa-ban'></i> No Access</button></td>";
+                      }
+
+                      echo "</tr>";
+                    }
+                  ?>
                   </tbody>
                 </table>
               </div>
@@ -113,6 +132,13 @@ $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
     $('#edit').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
+
+  $('.approval').click(function(e){
+    e.preventDefault();
+    $('#approval').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
@@ -152,6 +178,8 @@ function getRow(id){
     success: function(response){
       $('#edit_id').val(response.id);
       $('#edit_remarks').val(response.remarks);
+      $('#edit_approval_id').val(response.id);
+      $('#edit_approval').val(response.approval);
     }
   });
 }
@@ -159,7 +187,14 @@ function getRow(id){
 $(document).on('click', '.edit', function(e){
     e.preventDefault();
     var id = $(this).data('id');
-    console.log("Clicked Edit for ID:", id); // Debugging
+    console.log("Clicked Edit for ID:", id);
+    getRow(id);
+});
+
+$(document).on('click', '.approval', function(e){
+    e.preventDefault();
+    var id = $(this).data('id');
+    console.log("Clicked Edit for ID:", id);
     getRow(id);
 });
 
