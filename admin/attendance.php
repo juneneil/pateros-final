@@ -84,13 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <th>Name</th>
                     <th>Time In</th>
                     <th>Time Out</th>
-                    <th>Picture</th>
+                    <th>Picture In</th>
+                    <th>Picture Out</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </thead>
                   <tbody>
                     <?php
-                      $sql = "SELECT *, employees.employee_id AS empid, picture, attendance.id AS attid FROM attendance 
+                      $sql = "SELECT *, employees.employee_id AS empid, picture_in, attendance.id AS attid FROM attendance 
                               LEFT JOIN employees ON employees.id=attendance.employee_id 
                               ORDER BY attendance.date DESC, attendance.time_in DESC";
                       $query = $conn->query($sql);
@@ -105,13 +106,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                               <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
                               <td>";
-                              if (!empty($row['picture'])) {
-                                  echo "<a href='#' class='photo' data-photo='../employees/" . $row['picture'] . "' data-firstname='" . $row['firstname'] . "'>
-                                          <img src='../employees/" . $row['picture'] . "' alt='Employee Picture' width='50' height='50' class='img-circle'>
+                              if (!empty($row['picture_in'])) {
+                                  echo "<a href='#' class='photo' data-photo='../employees/" . $row['picture_in'] . "' data-firstname='" . $row['firstname'] . "'>
+                                          <img src='../employees/" . $row['picture_in'] . "' alt='Employee Picture In' width='50' height='50' class='img-circle'>
                                         </a>
                                         &nbsp;
                                         <button class='btn btn-info btn-sm photo' 
-                                            data-photo='../employees/" . $row['picture'] . "' 
+                                            data-photo='../employees/" . $row['picture_in'] . "' 
+                                            data-firstname='" . $row['firstname'] . "'>
+                                            <i class='fa fa-eye'></i>
+                                        </button>";
+                              } else {
+                                  echo "N/A";
+                              }
+                              echo "</td>
+                              <td>";
+                              if (!empty($row['picture_out'])) {
+                                  echo "<a href='#' class='photo' data-photo='../employees/" . $row['picture_out'] . "' data-firstname='" . $row['firstname'] . "'>
+                                          <img src='../employees/" . $row['picture_out'] . "' alt='Employee Picture Out' width='50' height='50' class='img-circle'>
+                                        </a>
+                                        &nbsp;
+                                        <button class='btn btn-info btn-sm photo' 
+                                            data-photo='../employees/" . $row['picture_out'] . "' 
                                             data-firstname='" . $row['firstname'] . "'>
                                             <i class='fa fa-eye'></i>
                                         </button>";

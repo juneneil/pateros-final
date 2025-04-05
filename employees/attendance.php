@@ -54,7 +54,7 @@ if (isset($_POST["employee"])) {
                 $squery = $conn->query($sql);
                 $srow = $squery->fetch_assoc();
                 $logstatus = $lognow > $srow["time_in"] ? 0 : 1;
-                $sql = "INSERT INTO attendance (employee_id, date, time_in, status, picture) VALUES ('$id', '$date_now', NOW(), '$logstatus', '$target_file')";
+                $sql = "INSERT INTO attendance (employee_id, date, time_in, status, picture_in) VALUES ('$id', '$date_now', NOW(), '$logstatus', '$target_file')";
                 if ($conn->query($sql)) {
                     $output["message"] = "Time in successful: " . $row["firstname"] . " " . $row["lastname"];
                 } else {
@@ -74,7 +74,7 @@ if (isset($_POST["employee"])) {
                     $output["error"] = true;
                     $output["message"] = "You have already timed out today.";
                 } else {
-                    $sql = "UPDATE attendance SET time_out = NOW(), picture = '$target_file' WHERE id = '" . $row["uid"] . "'";
+                    $sql = "UPDATE attendance SET time_out = NOW(), picture_out = '$target_file' WHERE id = '" . $row["uid"] . "'";
                     if ($conn->query($sql)) {
                         $output["message"] = "Time out successful: " . $row["firstname"] . " " . $row["lastname"];
                     } else {
