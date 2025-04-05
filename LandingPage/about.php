@@ -3,7 +3,7 @@
     <div class="row">
     <div class="col-md-10 ml-auto pr-0">
         <div class="about_container">
-        <div class="row" style="margin-right: -350px; margin-left: -40px; text-align: justify;">
+        <div class="row" style="margin-right: -350px; text-align: justify; width: 100%;">
             <div class="col-lg-3 col-md-5">
             <div class="detail-box">
                 <div class="heading_container">

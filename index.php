@@ -24,9 +24,9 @@
         <div class="row">
           <div class="col-md-2 offset-md-2">
             <div class="slider_heading">
-              <!-- <h2>
-                Bo <span>xer</span>
-              </h2> -->
+              <h2>
+                Pa <span>teros</span>
+              </h2>
             </div>
           </div>
           <div class="col-md-8 mx-auto">

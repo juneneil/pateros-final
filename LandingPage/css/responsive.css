@@ -164,8 +164,8 @@
     }
 
     .about_section .about_container {
-
-        padding: 45px 15px 45px 25px;
+        padding: 45px 0px 45px 25px;
+        width: 100%;
     }
 
     .client_section .box {

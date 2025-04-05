@@ -436,34 +436,76 @@ a:focus {
     }
   }
 
-  .about_container {
-    padding: 45px;
-    background-image: url(../images/pateros-image-13.jpg);
-    background-size: cover;
+//   .about_container {
+//     padding: 45px;
+//     background-image: url(../images/pateros-image-13.jpg);
+//     background-size: cover;
 
-    .detail-box {
-      display: flex;
-      flex-direction: column;
+//     .detail-box {
+//       display: flex;
+//       flex-direction: column;
 
-      p {
-        margin-top: 25px;
-      }
+//       p {
+//         margin-top: 25px;
+//       }
 
-      hr {
-        margin: 0 auto;
-        border: none;
-        width: 1.5px;
-        height: 125px;
-        background-color: $white;
-      }
+//       hr {
+//         margin: 0 auto;
+//         border: none;
+//         width: 1.5px;
+//         height: 125px;
+//         background-color: $white;
+//       }
 
-      a {
-        @include hero_btn($black, $white, 8px, 35px, 35px);
-        margin: 35px auto 0 auto;
-        box-shadow: 0 0 35px 0 rgba($color: #63f74f, $alpha: .7);
-      }
+//       a {
+//         @include hero_btn($black, $white, 8px, 35px, 35px);
+//         margin: 35px auto 0 auto;
+//         box-shadow: 0 0 35px 0 rgba($color: #63f74f, $alpha: .7);
+//       }
+//     }
+//   }
+// }
+
+
+.about_container {
+  padding: 45px;
+  background-image: url(../images/pateros-image-13.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+  .detail-box {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    p {
+      margin-top: 25px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    hr {
+      margin: 0 auto;
+      border: none;
+      width: 1.5px;
+      height: 125px;
+      background-color: $white;
+    }
+    a {
+      @include hero_btn($black, $white, 8px, 35px, 35px);
+      margin: 35px auto 0 auto;
+      box-shadow: 0 0 35px 0 rgba($color: #63f74f, $alpha: .7);
     }
   }
+  @media (max-width: 768px) {
+    padding: 30px 15px;
+    background-size: contain;
+  }
+  @media (max-width: 576px) {
+    padding: 20px 10px;
+  }
+}
 }
 
 // end about section
