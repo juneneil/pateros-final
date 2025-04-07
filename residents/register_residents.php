@@ -347,6 +347,7 @@ div.alert.alert-success {
                         <option value="License">License</option>
                         <option value="PhilID">PhilID</option>
                         <option value="Sr. Citizen ID">Sr. Citizen ID</option>
+                        <option value="BRGY ID">BRGY ID</option>
                         <option value="GSIS">GSIS</option>
                         <option value="PRC ID">PRC ID</option>
                         <option value="Voter’s ID">Voter’s ID</option>

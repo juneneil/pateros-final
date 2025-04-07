@@ -1,3 +1,8 @@
+<style>
+      html {
+    scroll-behavior: smooth;
+  }
+</style>
 <section class="blog_section layout_padding">
 <div class="container-fluid">
 <div class="row">
@@ -36,7 +41,7 @@
             <!-- <p>
             Hello World
             </p> -->
-            <a href="">
+            <a href="#CallBack">
                 Read More
             </a>
             </div>
@@ -54,8 +59,8 @@
             <div class="detail-box">
             <div class="img_date">
                 <h6>
-                17 <br>
-                Jun
+                2nd week <br>
+                of Feb
                 </h6>
             </div>
             <h3>
@@ -64,7 +69,7 @@
             <!-- <p>
             Hello World
             </p> -->
-            <a href="">
+            <a href="#CallBack">
                 Read More
             </a>
             </div>

@@ -17,6 +17,11 @@
 </head>
 
 <body>
+  <style>
+      html {
+    scroll-behavior: smooth;
+  }
+  </style>
   <div class="hero_area">
     <?php include "LandingPage/header.php"; ?>
     <section class=" slider_section position-relative">
@@ -24,8 +29,11 @@
         <div class="row">
           <div class="col-md-2 offset-md-2">
             <div class="slider_heading">
-              <h2>
+              <!-- <h2>
                 Pa <span>teros</span>
+              </h2> -->
+              <h2>
+                <span>Pateros</span>
               </h2>
             </div>
           </div>
@@ -46,7 +54,7 @@
                       </h1>
                       <hr />
                       <div class="btn-box">
-                        <a href="" class="btn-1">
+                        <a href="#CallBack" class="btn-1">
                           Contact Us
                         </a>
                       </div>
@@ -202,7 +210,7 @@
             </div>
             <div class="col-md-6  px-0">
               <div class="img-box">
-                <img src="LandingPage/images/pateros-image-13.jpg" alt="">
+                <img src="LandingPage/images/pateros-image-4.jpg" alt="">
               </div>
             </div>
           </div>

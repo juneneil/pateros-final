@@ -137,7 +137,7 @@ include 'header.php';
                     <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
                 </div>
             <?php endif; ?>
-            <form action="index.php" method="post">
+            <form action="login.php" method="post">
                 <center>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>

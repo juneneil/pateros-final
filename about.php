@@ -17,6 +17,11 @@
 </head>
 
 <body class="sub_page">
+  <style>
+      html {
+    scroll-behavior: smooth;
+  }
+  </style>
   <div class="hero_area">
     <?php include "LandingPage/header.php"; ?>
   </div>

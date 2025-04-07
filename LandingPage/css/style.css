@@ -58,7 +58,7 @@ body {
 /*header section*/
 .hero_area {
   height: 100vh;
-  background-image: url(../images/pateros-image-8.jpg);
+  background-image: url(../images/pateros-image-21.png);
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -224,6 +224,13 @@ a:focus {
     margin-right: 1px;
     margin-bottom: -20px;
     margin-top: -20px;
+  }
+  .blog_section .box .img-box img {
+    width: 100%;
+    height: 400px!important;
+  }
+  .slider_section .slider_heading h2 {
+    font-size: 4rem!important;
   }
 }
 
@@ -674,11 +681,12 @@ a:focus {
 
 .blog_section .box .img-box {
   position: relative;
+  padding: 10%;
 }
 
 .blog_section .box .img-box img {
   width: 100%;
-  height: 600px;
+  height: 550px;
 }
 
 .blog_section .box .detail-box {

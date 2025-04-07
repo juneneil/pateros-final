@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <th>Name</th>
                     <th>Time In</th>
                     <th>Time Out</th>
+                    <th>Number of hours</th>
                     <th>Picture In</th>
                     <th>Picture Out</th>
                     <th>Edit</th>
@@ -105,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <td>" . $row['firstname'] . ' ' . $row['lastname'] . "</td>
                               <td>" . date('h:i A', strtotime($row['time_in'])) . $status . "</td>
                               <td>" . date('h:i A', strtotime($row['time_out'])) . "</td>
+                              <td>" . $row['num_hr'] . "</td>
                               <td>";
                               if (!empty($row['picture_in'])) {
                                   echo "<a href='#' class='photo' data-photo='../employees/" . $row['picture_in'] . "' data-firstname='" . $row['firstname'] . "'>

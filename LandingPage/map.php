@@ -17,4 +17,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap" async defer></script>
 
-<div id="googleMap" style="width: 100%;"></div>
+<section id="GoggleMap">
+  <div id="googleMap" style="width: 100%;"></div>
+</section>

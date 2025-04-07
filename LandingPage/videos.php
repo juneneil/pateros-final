@@ -1,3 +1,8 @@
+<style>
+      html {
+    scroll-behavior: smooth;
+  }
+</style>
 <section class="class_section ">
 <div class="container-fluid">
     <div class="row">
@@ -39,11 +44,11 @@
                         </h2>
                     </div> -->
                     </div>
-                <div class="btn-box">
+                <!-- <div class="btn-box">
                     <a href="">
                     See More
                     </a>
-                </div>
+                </div> -->
                 </div>
             </div>
             <div class="item">
@@ -63,11 +68,11 @@
                     </h2>
                     </div> -->
                 </div>
-                <div class="btn-box">
+                <!-- <div class="btn-box">
                     <a href="">
                     See More
                     </a>
-                </div>
+                </div> -->
                 </div>
             </div>
             <div class="item">
@@ -87,11 +92,11 @@
                     </h2>
                     </div> -->
                 </div>
-                <div class="btn-box">
+                <!-- <div class="btn-box">
                     <a href="">
                     See More
                     </a>
-                </div>
+                </div> -->
                 </div>
             </div>
             <div class="item">
@@ -111,11 +116,11 @@
                         </h2>
                         </div>
                     </div> -->
-                <div class="btn-box">
+                <!-- <div class="btn-box">
                     <a href="">
                     See More
                     </a>
-                </div>
+                </div> -->
                 </div>
             </div>
             </div>
