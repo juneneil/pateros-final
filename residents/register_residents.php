@@ -306,7 +306,7 @@ div.alert.alert-success {
                     </div>
                 </div>
             <?php endif; ?>
-            <form method="post" enctype="multipart/form-data">
+            <form id="registerForm" method="post" enctype="multipart/form-data">
                 <center>
                     <label for="firstname">First Name</label>
                     <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
@@ -368,4 +368,44 @@ div.alert.alert-success {
             </center>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("registerForm").addEventListener("submit", function (event) {
+                event.preventDefault(); // Stop form submission
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You are about to save resident data. This will take a few seconds to process.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, proceed",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let countdown = 360; 
+                        Swal.fire({
+                            title: "Processing...",
+                            html: `<b>${countdown}</b> seconds remaining...`,
+                            timer: 360000,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                const timerInterval = setInterval(() => {
+                                    countdown--;
+                                    Swal.getHtmlContainer().innerHTML = `<b>${countdown}</b> seconds remaining...`;
+                                }, 1000);
+                                setTimeout(() => clearInterval(timerInterval), 360000);
+                            }
+                        }).then(() => {
+                            document.getElementById("registerForm").submit(); // Submit form after countdown
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+<!-- Include SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
