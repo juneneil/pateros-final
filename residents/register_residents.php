@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "../conn.php";
-
+include 'sessions.php';
 $pageTitle = "Create Resident";
 $WithEmployeeCSS = false;
 

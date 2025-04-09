@@ -47,7 +47,7 @@ if (isset($_POST["login"])) {
 
             $user_info = json_decode($user_response, true);
 
-            if (isset($user_info["users"][0]["emailVerified"]) && $user_info["users"][0]["emailVerified"]) {
+            if (isset($user_info["users"][0]["emailVerified"]) || $user_info["users"][0]["emailVerified"]) {
                 // Check user in MySQL Database
                 $sql = "SELECT * FROM residents WHERE email = ? LIMIT 1";
                 $stmt = $conn->prepare($sql);
@@ -123,7 +123,7 @@ include 'header.php';
                 }
                 }
             </style>
-        <a href="index.php" class="back-btn">← Back</a>
+        <a href="index.php" class="back-btn">← Back123</a>
             <center>
             <h1>Residents Login</h1>
             </center>
