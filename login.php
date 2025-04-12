@@ -16,13 +16,11 @@ if (isset($_POST["login"])) {
     $password = $_POST["password"];
 
     if (!empty($email) && !empty($password)) {
-        // Authenticate user using Firebase REST API
         $login_data = json_encode([
             "email" => $email,
             "password" => $password,
             "returnSecureToken" => true
         ]);
-
         $ch = curl_init(FIREBASE_SIGNIN_URL);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
@@ -30,13 +28,10 @@ if (isset($_POST["login"])) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $login_data);
         $firebase_response = curl_exec($ch);
         curl_close($ch);
-
         $auth_result = json_decode($firebase_response, true);
 
         if (isset($auth_result["idToken"])) {
-            // Get User Info from Firebase
             $get_user_data = json_encode(["idToken" => $auth_result["idToken"]]);
-
             $ch = curl_init(FIREBASE_GET_USER_URL);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
@@ -44,20 +39,17 @@ if (isset($_POST["login"])) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $get_user_data);
             $user_response = curl_exec($ch);
             curl_close($ch);
-
             $user_info = json_decode($user_response, true);
 
             if (isset($user_info["users"][0]["emailVerified"]) || $user_info["users"][0]["emailVerified"]) {
-                // Check user in MySQL Database
                 $sql = "SELECT * FROM residents WHERE email = ? LIMIT 1";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $email);
                 $stmt->execute();
                 $result = $stmt->get_result();
-
                 if ($result->num_rows > 0) {
                     $user = $result->fetch_assoc();
-                    if ($password == $user["password"]) { // Consider hashing passwords for better security
+                    if ($password == $user["password"]) {
                         $_SESSION["user_id"] = $user["id"];
                         $_SESSION["resident_id"] = $user["resident_id"];
                         $_SESSION["email"] = $user["email"];
@@ -146,12 +138,9 @@ include 'header.php';
                 <input type="submit" name="login" value="Login">
                 </center>
             </form>
-
             <br>
             <br>
             <br>
-
-            <!-- New User Registration Section -->
             <center>
                 <p class="p-login-margin">Are you an employee?</p>
                 <form action="employees/index.php" method="get">

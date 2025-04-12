@@ -10,13 +10,9 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   	<?php include 'includes/navbar.php'; ?>
   	<?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Dashboard
@@ -26,8 +22,6 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
-
-    <!-- Main content -->
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -51,19 +45,15 @@
           unset($_SESSION['success']);
         }
       ?>
-      <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM employees";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Employees</p>
             </div>
             <div class="icon">
@@ -72,25 +62,26 @@
             <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
               <?php
+              $sql = "SELECT * FROM attendance";
+              $query = $conn->query($sql);
+              $total = $query->num_rows;
+               if ($total > 0) {
                 $sql = "SELECT * FROM attendance";
                 $query = $conn->query($sql);
                 $total = $query->num_rows;
-
                 $sql = "SELECT * FROM attendance WHERE status = 1";
                 $query = $conn->query($sql);
                 $early = $query->num_rows;
-                
                 $percentage = ($early/$total)*100;
-
-                echo "<h3>".number_format($percentage, 2)."<sup style='font-size: 20px'>%</sup></h3>";
+                echo "<h3>" . number_format($percentage, 2) . "<sup style='font-size: 20px'>%</sup></h3>";
+                } else {
+                  echo "<h3>0.00<sup style='font-size: 20px'>%</sup></h3>";
+                }
               ?>
-          
               <p>On Time Percentage</p>
             </div>
             <div class="icon">
@@ -99,18 +90,14 @@
             <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>"
               ?>
-             
               <p>On Time Today</p>
             </div>
             <div class="icon">
@@ -119,18 +106,14 @@
             <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>"
               ?>
-
               <p>Late Today</p>
             </div>
             <div class="icon">
@@ -139,20 +122,16 @@
             <a href="attendance.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
       </div>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-primary">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM residents";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Other Users</p>
             </div>
             <div class="icon">
@@ -161,18 +140,14 @@
             <a href="other_user.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-primary">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM ticket";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Tickets</p>
             </div>
             <div class="icon">
@@ -181,19 +156,14 @@
             <a href="ticket.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-
-        
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-primary">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM position";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Positions</p>
             </div>
             <div class="icon">
@@ -202,19 +172,14 @@
             <a href="position.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-
-        
         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
           <div class="small-box bg-primary">
             <div class="inner">
               <?php
                 $sql = "SELECT * FROM schedules";
                 $query = $conn->query($sql);
-
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
-
               <p>Total Schedules</p>
             </div>
             <div class="icon">
@@ -224,7 +189,6 @@
           </div>
         </div>
       </div>
-      <!-- /.row -->
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -258,16 +222,11 @@
           </div>
         </div>
       </div>
-
-      </section>
-      <!-- right col -->
+    </section>
     </div>
   	<?php include 'includes/footer.php'; ?>
 
 </div>
-<!-- ./wrapper -->
-
-<!-- Chart Data -->
 <?php
   $and = 'AND YEAR(date) = '.$year;
   $months = array();
@@ -292,7 +251,6 @@
   $ontime = json_encode($ontime);
 
 ?>
-<!-- End Chart Data -->
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
@@ -327,33 +285,20 @@ $(function(){
   barChartData.datasets[1].strokeColor = '#00a65a'
   barChartData.datasets[1].pointColor  = '#00a65a'
   var barChartOptions                  = {
-    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
     scaleBeginAtZero        : true,
-    //Boolean - Whether grid lines are shown across the chart
     scaleShowGridLines      : true,
-    //String - Colour of the grid lines
     scaleGridLineColor      : 'rgba(0,0,0,.05)',
-    //Number - Width of the grid lines
     scaleGridLineWidth      : 1,
-    //Boolean - Whether to show horizontal lines (except X axis)
     scaleShowHorizontalLines: true,
-    //Boolean - Whether to show vertical lines (except Y axis)
     scaleShowVerticalLines  : true,
-    //Boolean - If there is a stroke on each bar
     barShowStroke           : true,
-    //Number - Pixel width of the bar stroke
     barStrokeWidth          : 2,
-    //Number - Spacing between each of the X value sets
     barValueSpacing         : 5,
-    //Number - Spacing between data sets within X values
     barDatasetSpacing       : 1,
-    //String - A legend template
     legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-    //Boolean - whether to make the chart responsive
     responsive              : true,
     maintainAspectRatio     : true
   }
-
   barChartOptions.datasetFill = false
   var myChart = barChart.Bar(barChartData, barChartOptions)
   document.getElementById('legend').innerHTML = myChart.generateLegend();

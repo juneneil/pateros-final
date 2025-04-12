@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2025 at 07:16 PM
+-- Generation Time: Apr 12, 2025 at 08:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pateros_dbx`
+-- Database: `pateros_db`
 --
 
 -- --------------------------------------------------------
@@ -45,7 +45,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `admin_title`, `created_on`) VALUES
 (1, 'admin', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Final', 'Boss', 'PaterosLogo.png', 'Super Admin', '2025-02-17'),
 (2, 'admin2', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Civil', 'Registry', 'PaterosLogo.png', 'Civil Registry', '2025-02-17'),
-(3, 'admin3', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Business', 'Registration', 'PaterosLogo.png', 'Business Registratio', '2025-02-17'),
+(3, 'admin3', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Business', 'Registration', 'PaterosLogo.png', 'Business Registration', '2025-02-17'),
 (4, 'admin4', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Job', 'Opportunities', 'PaterosLogo.png', 'Job Opportunities', '2025-02-17'),
 (5, 'admin5', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'DS', 'WD', 'PaterosLogo.png', 'DSWD', '2025-02-17');
 
@@ -59,21 +59,14 @@ CREATE TABLE `attendance` (
   `id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `time_in` time NOT NULL,
+  `time_in` datetime NOT NULL,
   `status` int(1) NOT NULL,
-  `time_out` time NOT NULL,
+  `time_out` datetime DEFAULT NULL,
   `num_hr` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `picture` varchar(255) DEFAULT NULL
+  `picture_in` varchar(255) NOT NULL,
+  `picture_out` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`id`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`, `created_at`, `picture`) VALUES
-(141, 45, '2025-03-22', '01:12:26', 1, '00:00:00', 0, '2025-03-21 17:12:26', 'uploads/INH879460321_1742577146.jpg'),
-(142, 45, '2025-03-27', '03:28:44', 1, '03:29:38', 0, '2025-03-26 19:28:44', 'uploads/INH879460321_1743017378.jpg');
 
 -- --------------------------------------------------------
 
@@ -89,16 +82,6 @@ CREATE TABLE `callback` (
   `message` varchar(500) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `callback`
---
-
-INSERT INTO `callback` (`id`, `name`, `phone_number`, `email`, `message`, `created_at`) VALUES
-(1, 'asdasd', 'asdasas', 'asdasd@gmail.com', 'asdsad', '2025-03-30 17:10:33'),
-(2, 'asd', 'asd', 'asda@gmail.com', 'asdasd', '2025-03-30 17:11:05'),
-(3, 'asd', 'asd', 'asdasd@gmail.com', 'asdasd', '2025-03-30 17:11:17'),
-(4, 'asd', 'asd', 'asdasd@gmail.com', 'asdasd', '2025-03-30 17:11:30');
 
 -- --------------------------------------------------------
 
@@ -162,21 +145,9 @@ CREATE TABLE `employees` (
   `photo` varchar(200) NOT NULL,
   `created_on` date NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `password_changed` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `created_on`, `email`, `password`, `password_changed`) VALUES
-(4, 'JIE625973480', 'Gemalyn', 'Cepe', 'Carmen, Bohol', '1995-10-02', '09468029840', 'Female', 2, 3, 'admin.png', '2025-02-19', 'was3@gmail.com', 'was3', 1),
-(42, 'HCR315947208', 'oks1', 'nah1', 'dawss', '2024-12-24', '012312312312321', 'Male', 2, 1, 'ano2.jpg', '2024-12-08', 'oksnah1@gmail.com', 'qwert', 0),
-(43, 'KAR047835261', 'oks2', 'nah2', 'daw', '2024-12-24', '012312312312321', 'Male', 1, 1, 'ano3.jpg', '2024-12-08', 'oksnah2@gmail.com', 'qwertyu', 1),
-(45, 'INH879460321', 'oks4', 'nah4', 'daw', '2024-12-24', '012312312312321', 'Male', 1, 1, 'ano4.jpg', '2024-12-08', 'employee@gmail.com', 'password', 1),
-(48, 'XLT095126483', 'gg', 'gg', 'gg', '2025-03-18', '22', 'Male', 1, 1, 'ano2.jpg', '2025-03-02', 'gg@gmail.com', 'gg', 0),
-(49, 'CPA439256108', 'kkk', 'kkk', 'kkk', '2025-03-17', '012312312312321', 'Male', 1, 1, 'image6.jpeg', '2025-03-25', 'kkk@gmail.com', 'kkk1', 0);
 
 -- --------------------------------------------------------
 
@@ -193,13 +164,6 @@ CREATE TABLE `employeeusers` (
   `last_name` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employeeusers`
---
-
-INSERT INTO `employeeusers` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `created_at`) VALUES
-(1, 'InnocentClay', '$2y$10$OL5gcxQVgVNxuZsituvuD.scn2YFey3ZIJEV1D.0rzlhIPCm.zVLu', 'InnoC@gmail.com', 'Innocent', 'Clay', '2025-02-17 23:44:53');
 
 -- --------------------------------------------------------
 
@@ -265,12 +229,7 @@ CREATE TABLE `residents` (
 INSERT INTO `residents` (`id`, `resident_id`, `firstname`, `lastname`, `age`, `address`, `birthdate`, `contact_info`, `gender`, `photo_type`, `photo`, `email`, `password`, `created_on`) VALUES
 (4, 'IGK216473805', 'cc', 'cc', '22', 'cc', '2025-03-05', '22', 'Female', '', 'ano2.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
 (5, 'DZC267051394', 'ccss', 'ccss', '22', 'ccss', '2025-03-05', '22', 'Female', '', 'ano3.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
-(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', '', 'ano4.jpg', 'resident@gmail.com', 'password', '2025-03-01 16:01:22'),
-(11, 'JAN594722893', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-22', '09389771409', 'male', '', 'image6.jpeg', 'magnanaojuneneil@gmail.com', 'june123', '2025-03-22 05:36:11'),
-(12, 'EXM830986653', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-25', '09389771409', 'male', '', 'image6.jpeg', 'noviepilarlabanero@gmail.com', 'june123', '2025-03-25 12:48:58'),
-(13, 'XUQ178969110', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-31', '09389771409', 'male', 'license', 'image6.jpeg', 'junesz@gmail.com', 'juneneil123', '2025-03-30 10:07:18'),
-(14, 'BPJ298249556', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-04-01', '09389771409', 'male', 'license', 'image6.jpeg', 'juneb@gmail.com', 'juneneil123', '2025-03-30 10:08:10'),
-(15, 'REN493513099', 'June Neil', 'Magnanao', '22', 'Pio Del Pilar', '2025-03-31', '09389771409', 'male', 'PWD ID', 'image6.jpeg', 'juneneilsiaomagnanao123@gmail.com', 'juneneil123', '2025-03-30 10:09:44');
+(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', '', 'ano4.jpg', 'resident@gmail.com', 'password', '2025-03-01 16:01:22');
 
 -- --------------------------------------------------------
 
@@ -316,32 +275,9 @@ CREATE TABLE `ticket` (
   `dswd` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `booking_date` datetime DEFAULT NULL,
-  `remarks` varchar(255) NOT NULL DEFAULT 'not serve'
+  `remarks` varchar(255) NOT NULL DEFAULT 'not serve',
+  `approval` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `ticket`
---
-
-INSERT INTO `ticket` (`id`, `resident_id`, `category`, `sub_category`, `reason_for_inquiry`, `voters_certificate`, `asesor_office`, `business_office`, `health_office`, `cedula`, `job_opportunities`, `police_clearance`, `dswd`, `created_at`, `booking_date`, `remarks`) VALUES
-(1, 'BFA538906274', 'Civil Registry', 'Birth Service', 'asdasd', '', '', '', '', '', '', '', '', '2025-03-01 14:13:43', NULL, 'Not Serve'),
-(2, 'IGK216473805', 'Civil Registry', '4PS', 'wew', '', '', '', '', '', '', '', '', '2025-03-01 14:45:13', NULL, 'Serve'),
-(3, 'IGK216473805', 'Job Opportunities', 'Birth Service', 'swew', '', '', '', '', '', '', '', '', '2025-03-01 15:03:31', NULL, 'Serve'),
-(4, 'SVD793184256', 'Civil Registry', 'Cedula', 'xx', '', '', '', '', '', '', '', '', '2025-03-01 15:58:00', NULL, 'Not Serve'),
-(5, 'SVD793184256', 'DSWD', 'Voters Certificate', 'ss', '', '', '', '', '', '', '', '', '2025-03-01 17:31:26', NULL, 'Not Serve'),
-(6, 'HJK226789116', 'Civil Registry', 'Feeding Program', 'wew', '', '', '', '', '', '', '', '', '2025-03-21 01:14:50', NULL, 'Serve'),
-(7, 'HJK226789116', 'Civil Registry', 'Feeding Program', 'aa', '', '', '', '', '', '', '', '', '2025-03-21 01:20:59', '2025-03-21 00:00:00', 'Serve'),
-(8, 'HJK226789116', 'Business Registration', 'Birth Service', 'aaa', '', '', '', '', '', '', '', '', '2025-03-21 01:21:13', '2025-03-29 00:00:00', 'Serve'),
-(9, 'HJK226789116', 'Business Registration', 'Birth Service', 'ads', '', '', '', '', '', '', '', '', '2025-03-21 02:59:51', '2025-03-26 00:00:00', 'Serve'),
-(10, 'HJK226789116', 'Civil Registry', 'Family Planning', 'asd', '', '', '', '', '', '', '', '', '2025-03-21 03:00:00', '2025-03-19 00:00:00', 'Serve'),
-(11, 'HJK226789116', 'Civil Registry', 'Cedula', 'ads', '', '', '', '', '', '', '', '', '2025-03-21 03:00:09', '2025-03-27 00:00:00', 'Serve'),
-(12, 'HJK226789116', 'Civil Registry', '4PS', 'hello po', '', '', '', '', '', '', '', '', '2025-03-21 14:21:53', '2025-03-24 00:00:00', 'Not Serve'),
-(13, 'JAN594722893', 'Civil Registry', 'Tupad', 'sdsa', '', '', '', '', '', '', '', '', '2025-03-22 05:37:42', '2025-03-22 00:00:00', 'Not Serve'),
-(14, 'JAN594722893', 'Civil Registry', 'Voters Certificate', 'aaff', '', '', '', '', '', '', '', '', '2025-03-22 05:41:31', '2025-03-28 17:45:00', 'Serve'),
-(15, 'HJK226789116', 'DSWD', 'Tupad', 'asd', '', '', '', '', '', '', '', '', '2025-03-25 05:46:50', '2025-03-22 16:46:00', 'Serve'),
-(16, 'HJK226789116', 'Civil Registry', '4PS', 'aaaaa', '', '', '', '', '', '', '', '', '2025-03-25 05:48:18', '2025-03-26 17:48:00', 'Serve'),
-(17, 'HJK226789116', 'Civil Registry', 'Feeding Program', 'tr', '', '', '', '', '', '', '', '', '2025-03-25 06:21:13', '2025-03-29 16:20:00', 'Serve'),
-(18, 'HJK226789116', 'Civil Registry', '4PS', 'sds', '', '', '', '', '', '', '', '', '2025-03-25 06:47:46', '2025-03-26 16:47:00', 'Not Serve');
 
 --
 -- Indexes for dumped tables
@@ -435,13 +371,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `callback`
 --
 ALTER TABLE `callback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `cashadvance`
@@ -459,7 +395,7 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `employeeusers`
@@ -483,7 +419,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `residents`
 --
 ALTER TABLE `residents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `schedules`
@@ -495,7 +431,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

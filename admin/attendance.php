@@ -157,43 +157,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </section>   
   </div>
 
-  <!-- jQuery & Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- Custom Modal Script -->
 <script src="modal_script.js"></script>
 
 
-  <script>
-//     $(document).ready(function() {
-//     // When an image or eye icon is clicked
-//     $('.photo').click(function() {
-//         var imageUrl = $(this).data('photo'); // Get image URL
-//         var firstName = $(this).data('firstname'); // Get employee first name
+<script>
+  $(document).ready(function() {
+      $('.photo').click(function() {
+          var imageUrl = $(this).data('photo'); 
+          var firstName = $(this).data('firstname'); 
 
-//         // Update modal elements
-//         $('#modalImage').attr('src', imageUrl);
-//         $('#employeeFirstName').text(firstName);
+          $('#modalImage').attr('src', imageUrl);
+          $('#employeeFirstName').text(firstName);
 
-//         // Show modal
-//         $('#imageModal').modal('show');
-//     });
-// });
-
-$(document).ready(function() {
-    $('.photo').click(function() {
-        var imageUrl = $(this).data('photo'); 
-        var firstName = $(this).data('firstname'); 
-
-        $('#modalImage').attr('src', imageUrl);
-        $('#employeeFirstName').text(firstName);
-
-        $('#imageModal').modal('show');
-    });
-});
-
-  </script>
+          $('#imageModal').modal('show');
+      });
+  });
+</script>
 
   <!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">

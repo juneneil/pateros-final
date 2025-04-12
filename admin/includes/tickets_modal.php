@@ -24,7 +24,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="approval" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -39,6 +38,7 @@
             <select class="form-control" id="edit_approval" name="approval">
               <option value="Approved">Approved</option>
               <option value="Not Approved" selected>Not Approved</option>
+              <option value="Proceed to Payment" <?php echo $disablePayment; ?>>Proceed to Payment</option>
             </select>
           </div>
         </div>

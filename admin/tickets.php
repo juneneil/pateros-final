@@ -102,6 +102,7 @@
                       
                       $currentUserId = $_SESSION['id'];
                       $assignedApprover = $categoryAccess[$row['category']] ?? null;
+                      $disablePayment = ($currentUserId == 4 || $currentUserId == 5) ? 'disabled style="color:gray;"' : '';
                       
                       if ($currentUserId == 1 || $currentUserId == $assignedApprover) {
                           echo "<td><button class='btn btn-success btn-sm btn-flat approval' data-id='".$row['id']."'><i class='fa fa-edit'></i> Approval</button></td>";
@@ -115,7 +116,6 @@
                   </tbody>
                 </table>
               </div>
-              <!-- End of wrapper for horizontal scroll -->
             </div>
           </div>
         </div>
@@ -197,9 +197,8 @@ $(document).on('click', '.approval', function(e){
     console.log("Clicked Edit for ID:", id);
     getRow(id);
 });
-
-
 </script>
+
 <?php include 'includes/datatable_initializer.php'; ?>
 </body>
 </html>

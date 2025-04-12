@@ -30,9 +30,6 @@
         <div class="row">
           <div class="col-md-2 offset-md-2">
             <div class="slider_heading">
-              <!-- <h2>
-                Pa <span>teros</span>
-              </h2> -->
               <h2>
                 <span>Pateros</span>
               </h2>

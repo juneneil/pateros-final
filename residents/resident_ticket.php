@@ -197,8 +197,6 @@ include 'header.php';
                         <label for="resident_id"><b>Resident ID:</b></label>
                         <input type="text" class="form-control" value="<?php echo $_SESSION["resident_id"]; ?>" id="resident_id" name="resident_id" required>
                     </div>
-
-                    <!-- New Radio Button for Category -->
                     <div class="form-group text-dark">
                         <h5>Please choose your category out of the 4 main categories.</h5>
                         <label for="category"><b>Category:</b></label><br>
@@ -215,8 +213,6 @@ include 'header.php';
                         <input type="radio" id="dswd" name="category" value="DSWD" required>
                         <label for="dswd">DSWD</label><br>
                     </div>
-
-                    <!-- New Radio Buttons for Sub-Category -->
                     <div class="form-group text-dark sub-category-div" id="civil_registry_div">
                     <h5>Please choose the sub-category from the main category that you've chosen above.</h5>
                         <label for="sub_category"><b>Civil Registry:</b></label>
@@ -235,7 +231,6 @@ include 'header.php';
                         <br>
                         <input type="radio" id="voters_certificate" class="sub-category-radio" name="sub_category" value="Voters Certificate" required><label for="voters_certificate">Voters Certificate</label><br>
                     </div>
-
                     <div class="form-group text-dark sub-category-div" id="business_registration_div">
                         <label for="sub_category"><b>Business Registration:</b></label>
                         <br>
@@ -246,46 +241,22 @@ include 'header.php';
                         <label for="business_renewal">Business Renewal</label>
                         <br>
                     </div>
-
                     <div class="form-group text-dark sub-category-div" id="job_opportunities_div">
                         <label for="sub_category"><b>Job Opportunities:</b></label><br>
                         <input type="radio" id="peso_jobs" class="sub-category-radio" name="sub_category" value="Peso Jobs" required><label for="peso_jobs">Peso Jobs</label><br>
                         <input type="radio" id="national_jobs" class="sub-category-radio" name="sub_category" value="National Jobs" required><label for="national_jobs">National Jobs</label><br>
                         <input type="radio" id="tupad" class="sub-category-radio" name="sub_category" value="Tupad" required><label for="tupad">Tupad</label><br>
                     </div>
-
                     <div class="form-group text-dark sub-category-div" id="dswd_div">
                         <label for="sub_category"><b>DSWD:</b></label><br>
                         <input type="radio" id="family_planning" class="sub-category-radio" name="sub_category" value="Family Planning" required><label for="family_planning">Family Planning</label><br>
                         <input type="radio" id="feeding_program" class="sub-category-radio" name="sub_category" value="Feeding Program" required><label for="feeding_program">Feeding Program</label><br>
                         <input type="radio" id="4ps" class="sub-category-radio" name="sub_category" value="4PS" required><label for="4ps">4PS</label><br>
                     </div>
-
-                    <!-- Booking Date and Time -->
-                    <!-- <div class="form-group text-dark">
-                        <label for="booking_date"><b>Booking Date & Time:</b></label><br>
-                        <input type="datetime-local" id="booking_date" name="booking_date" required>
-                    </div>
-
-                    <script>
-                    document.getElementById("booking_date").addEventListener("change", function() {
-                        let inputDate = new Date(this.value);
-                        let hours = inputDate.getHours();
-                        let minutes = inputDate.getMinutes();
-
-                        if (hours < 7 || (hours === 16 && minutes > 0) || hours > 16) {
-                            alert("Error Message: Booking time must be between 7:00 AM and 4:00 PM (exactly 4:00 PM is allowed).");
-                            this.value = "";
-                        }
-                    });
-                    </script> -->
-
-                    <!-- Booking Date and Time -->
                     <div class="form-group text-dark">
                         <label for="booking_date"><b>Booking Date & Time:</b></label><br>
                         <input type="datetime-local" id="booking_date" name="booking_date" required>
                     </div>
-
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
                             let bookingInput = document.getElementById("booking_date");
@@ -309,7 +280,6 @@ include 'header.php';
                             });
                         });
                     </script>
-
                     <div class="form-group text-dark">
                         <label for="reason_for_inquiry">Reason for Inquiry:</label>
                         <textarea class="form-control" id="reason_for_inquiry" name="reason_for_inquiry" required></textarea>
@@ -320,8 +290,6 @@ include 'header.php';
         </div>
     </div>
 </div>
-
-    
     <div class="col-md-12 mb-4">
         <div class="section-box p-4 bg-light rounded shadow">
             <div class="container mt-5">
@@ -361,8 +329,6 @@ include 'header.php';
                     </table>
                 </div>
             </div>
-
-            <!-- Pagination Controls -->
             <div class="d-flex justify-content-center mt-3">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
@@ -392,7 +358,6 @@ include 'header.php';
             </div>
         </div>
     </div>
-
     <?php include 'footer.php'; ?>
 </body>
 
