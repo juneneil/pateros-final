@@ -138,7 +138,7 @@ include 'header.php';
                 </center>
             </form>
             <center>
-                <p class="p-login-margin">Do you want to go back?</p>
+                <p class="p-login-margin">Go back home?</p>
                 <a href="../index.php"><input type="submit" value="Back to Login" class="btn btn-primary"></a>
             </center>
         </div>

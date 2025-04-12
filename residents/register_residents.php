@@ -1,7 +1,6 @@
 <?php
 session_start();
 include "../conn.php";
-include 'sessions.php';
 $pageTitle = "Create Resident";
 $WithEmployeeCSS = false;
 
@@ -267,26 +266,42 @@ input[type="submit"]:hover {
 .p-login-margin {
   margin-bottom: 0;
 }
-
-/* FOR ALERT CSS */
 div.alert.alert-success {
     padding: 5px 10px 5px 10px;
     background-color: green;
     color: white;
     font-size: 20px;
 }
-
 #alert-success {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-
-/* END FOR ALERT CSS */
-
+#birthdate {
+    background-color: #f0f0f0;
+    color: #333;
+}
+select#photo_type {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+select#photo_type:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    background-color: #fff;
+}
 </style>
-
 <body>
     <div class="container">
         <div class="login-container" id="register_style">
@@ -335,11 +350,6 @@ div.alert.alert-success {
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-                    <!-- <label for="photo">Upload Photo</label>
-                    <div>
-                    <input type="file" id="photo" name="photo" accept="image/*">
-                    </div> -->
-
                     <label for="photo_type">Select Type of ID</label>
                     <select id="photo_type" name="photo_type" required>
                         <option value="" disabled selected>Select an option</option>
@@ -362,9 +372,16 @@ div.alert.alert-success {
                     <input type="submit" name="register" value="Create Account">
                 </center>
             </form>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const today = new Date().toISOString().split("T")[0];
+                    document.getElementById("birthdate").setAttribute("max", today);
+                });
+            </script>
+
             <center>
                 <p class="p-login-margin">Do you want to go back?</p>
-                <a href="../index.php"><input type="submit" value="Back to Login" class="btn btn-primary"></a>
+                <a href="../login.php"><input type="submit" value="Back to Login" class="btn btn-primary"></a>
             </center>
         </div>
     </div>
@@ -372,7 +389,7 @@ div.alert.alert-success {
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("registerForm").addEventListener("submit", function (event) {
-                event.preventDefault(); // Stop form submission
+                event.preventDefault();
 
                 Swal.fire({
                     title: "Are you sure?",
@@ -398,14 +415,12 @@ div.alert.alert-success {
                                 setTimeout(() => clearInterval(timerInterval), 360000);
                             }
                         }).then(() => {
-                            document.getElementById("registerForm").submit(); // Submit form after countdown
+                            document.getElementById("registerForm").submit();
                         });
                     }
                 });
             });
         });
     </script>
-
-<!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

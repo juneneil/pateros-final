@@ -123,7 +123,7 @@ include 'header.php';
                 }
                 }
             </style>
-        <a href="index.php" class="back-btn">← Back123</a>
+        <a href="index.php" class="back-btn">← Back</a>
             <center>
             <h1>Residents Login</h1>
             </center>
