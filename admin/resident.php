@@ -2,13 +2,9 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Residents List
@@ -19,7 +15,6 @@
         <li class="active">Resident List</li>
       </ol>
     </section>
-    <!-- Main content -->
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -111,7 +106,6 @@
   </div>
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/resident_modal.php'; ?>
-<!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -162,11 +156,10 @@ $(function(){
   $('.photo').click(function(e){
     e.preventDefault();
     var photoUrl = $(this).data('photo');
-    $('#modalImage').attr('src', photoUrl); // Set the modal's image source
-    $('#imageModal').modal('show'); // Show the modal
+    $('#modalImage').attr('src', photoUrl);
+    $('#imageModal').modal('show');
   });
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',

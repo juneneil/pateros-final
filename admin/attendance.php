@@ -156,12 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </section>   
   </div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="modal_script.js"></script>
-
-
 <script>
   $(document).ready(function() {
       $('.photo').click(function() {
@@ -175,8 +172,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       });
   });
 </script>
-
-  <!-- Image Modal -->
 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -195,8 +190,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </div>
 </div>
-
-
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/attendance_modal.php'; ?>
   </div>
@@ -216,7 +209,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       var id = $(this).data('id');
       getRow(id);
     });
-
     $('#attendance_pdf').click(function(e){
       e.preventDefault();
       $('#payForm').attr('action', 'attendance_pdf.php');
@@ -224,7 +216,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     });
 
   });
-
   function getRow(id){
     $.ajax({
       type: 'POST',

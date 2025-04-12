@@ -43,7 +43,6 @@
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
             </div>
             <div class="box-body">
-              <!-- Wrapper for horizontal scroll -->
               <div style="overflow-x: auto;">
                 <table id="example1" class="table table-bordered text-center">
                   <thead>
@@ -72,14 +71,12 @@
                   </tbody>
                 </table>
               </div>
-              <!-- End of wrapper for horizontal scroll -->
             </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-  
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/schedule_modal.php'; ?>
 </div>
@@ -100,7 +97,6 @@
       getRow(id);
     });
   });
-
   function getRow(id){
     $.ajax({
       type: 'POST',

@@ -7,13 +7,9 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Payroll
@@ -23,7 +19,6 @@
         <li class="active">Payroll</li>
       </ol>
     </section>
-    <!-- Main content -->
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -65,7 +60,6 @@
               </div>
             </div>
             <div class="box-body">
-              <!-- Wrapper for horizontal scroll -->
               <div style="overflow-x: auto;">
                 <table id="example1" class="table table-bordered text-center">
                   <thead>
@@ -125,14 +119,12 @@
                   </tbody>
                 </table>
               </div>
-              <!-- End of wrapper for horizontal scroll -->
             </div>
           </div>
         </div>
       </div>
     </section>   
   </div>
-
   <?php include 'includes/footer.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?> 
@@ -168,9 +160,7 @@ $(function(){
     $('#payForm').attr('action', 'payslip_generate.php');
     $('#payForm').submit();
   });
-
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -186,8 +176,6 @@ function getRow(id){
     }
   });
 }
-
-
 </script>
 <?php include 'includes/datatable_initializer.php'; ?>
 </body>

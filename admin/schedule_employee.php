@@ -39,7 +39,6 @@
                   <a href="schedule_print.php" class="btn btn-success btn-sm btn-flat"><span class="glyphicon glyphicon-print"></span> Print</a>
                 </div>
                 <div class="box-body">
-                  <!-- Wrapper for horizontal scroll -->
                   <div style="overflow-x: auto;">
                     <table id="example1" class="table table-bordered text-center">
                       <thead>
@@ -71,7 +70,6 @@
                       </tbody>
                     </table>
                   </div>
-                  <!-- End of wrapper for horizontal scroll -->
                 </div>
               </div>
             </div>
@@ -82,33 +80,30 @@
     <?php include 'includes/employee_schedule_modal.php'; ?>
     </div>
     <?php include 'includes/scripts.php'; ?>
-      <script>
-          $(function() {
-            $('.edit').click(function(e) {
-              e.preventDefault();
-              $('#edit').modal('show');
-              var id = $(this).data('id');
-              getRow(id);
-            });
+    <script>
+        $(function() {
+          $('.edit').click(function(e) {
+            e.preventDefault();
+            $('#edit').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
           });
-
-          
-
-          function getRow(id) {
-            $.ajax({
-              type: 'POST',
-              url: 'schedule_employee_row.php',
-              data: {id: id},
-              dataType: 'json',
-              success: function(response) {
-                $('.employee_name').html(response.firstname + ' ' + response.lastname);
-                $('#schedule_val').val(response.schedule_id);
-                $('#schedule_val').html(response.time_in + ' ' + response.time_out);
-                $('#empid').val(response.empid);
-              }
-            });
-          }
-      </script>
-      <?php include 'includes/datatable_initializer.php'; ?>
+        });
+        function getRow(id) {
+          $.ajax({
+            type: 'POST',
+            url: 'schedule_employee_row.php',
+            data: {id: id},
+            dataType: 'json',
+            success: function(response) {
+              $('.employee_name').html(response.firstname + ' ' + response.lastname);
+              $('#schedule_val').val(response.schedule_id);
+              $('#schedule_val').html(response.time_in + ' ' + response.time_out);
+              $('#empid').val(response.empid);
+            }
+          });
+        }
+    </script>
+    <?php include 'includes/datatable_initializer.php'; ?>
 </body>
 </html>

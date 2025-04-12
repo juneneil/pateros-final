@@ -8,13 +8,9 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Tickets
@@ -24,7 +20,6 @@
         <li class="active">Ticket</li>
       </ol>
     </section>
-    <!-- Main content -->
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -55,12 +50,10 @@
               <div class="pull-right">
                 <form method="POST" class="form-inline" id="payForm">
                   <button type="button" class="btn btn-success btn-sm btn-flat" id="payroll"><span class="glyphicon glyphicon-print"></span> Ticket</button>
-                  <!-- <button type="button" class="btn btn-primary btn-sm btn-flat" id="payslip"><span class="glyphicon glyphicon-print"></span> Payslip</button> -->
                 </form>
               </div>
             </div>
             <div class="box-body">
-              <!-- Wrapper for horizontal scroll -->
               <div style="overflow-x: auto;">
                 <table id="example1" class="table table-bordered text-center">
                   <thead>
@@ -99,17 +92,14 @@
                         'Job Opportunities' => 4,
                         'DSWD' => 5
                       ];
-                      
                       $currentUserId = $_SESSION['id'];
                       $assignedApprover = $categoryAccess[$row['category']] ?? null;
                       $disablePayment = ($currentUserId == 4 || $currentUserId == 5) ? 'disabled style="color:gray;"' : '';
-                      
                       if ($currentUserId == 1 || $currentUserId == $assignedApprover) {
                           echo "<td><button class='btn btn-success btn-sm btn-flat approval' data-id='".$row['id']."'><i class='fa fa-edit'></i> Approval</button></td>";
                       } else {
                           echo "<td><button class='btn btn-default btn-sm btn-flat' disabled><i class='fa fa-ban'></i> No Access</button></td>";
                       }
-
                       echo "</tr>";
                     }
                   ?>
@@ -122,7 +112,6 @@
       </div>
     </section>   
   </div>
-
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/tickets_modal.php'; ?>
 </div>

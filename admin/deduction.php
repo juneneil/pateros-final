@@ -2,13 +2,9 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Deductions
@@ -18,7 +14,6 @@
         <li class="active">Deductions</li>
       </ol>
     </section>
-    <!-- Main content -->
     <section class="content">
       <?php
         if(isset($_SESSION['error'])){
@@ -49,7 +44,7 @@
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
             </div>
             <div class="box-body">
-              <div style="overflow-x: auto;"> <!-- Add this wrapper for horizontal scroll -->
+              <div style="overflow-x: auto;">
                 <table id="example1" class="table table-bordered text-center">
                   <thead>
                     <th>Description</th>
@@ -85,7 +80,6 @@
       </div>
     </section>   
   </div>
-    
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/deduction_modal.php'; ?>
 </div>
@@ -106,7 +100,6 @@ $(function(){
     getRow(id);
   });
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',
