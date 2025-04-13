@@ -65,6 +65,13 @@ include 'header.php';
         <div class="row flex-container">
             <div class="col-md-6 mb-4">
                 <div class="section-box p-4 bg-light rounded shadow">
+                    <h5 class="section-title">Resident ID</h5> <?php echo $_SESSION['resident_id']; ?>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-container">
+            <div class="col-md-6 mb-4">
+                <div class="section-box p-4 bg-light rounded shadow">
                     <h5 class="section-title">Full name</h5> <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?>
                 </div>
             </div>
