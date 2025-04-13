@@ -22,7 +22,7 @@ if (isset($_POST["register"])) {
     $age = trim($_POST["age"]);
     $email = trim($_POST["email"]);
     $password = $_POST["password"];
-    
+
     // Generate Resident ID
     $resident_id = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 3) . random_int(100000000, 999999999);
 
@@ -33,32 +33,13 @@ if (isset($_POST["register"])) {
         exit();
     }
 
-    // Handle Image Upload (Firebase Storage)
-    $photo_url = "";
     $filename = "";
     if (!empty($_FILES["photo"]["name"])) {
         $temp = $_FILES["photo"]["tmp_name"];
         $filename = basename($_FILES["photo"]["name"]);
-        $firebase_storage_path = "resident_photos/" . time() . "_" . $filename;
-        
-        // Move file temporarily to server before uploading to Firebase Storage
+
         $local_path = "../images/" . $filename;
         move_uploaded_file($temp, $local_path);
-
-        // Upload to Firebase Storage using cURL
-        $storage_url = "https://firebasestorage.googleapis.com/upload/storage/v1/b/" . FIREBASE_STORAGE_BUCKET . "/o?uploadType=media&name=" . urlencode($firebase_storage_path);
-        $photo_url = "https://firebasestorage.googleapis.com/v0/b/" . FIREBASE_STORAGE_BUCKET . "/o/" . urlencode($firebase_storage_path) . "?alt=media";
-        
-        $ch = curl_init($storage_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Authorization: Bearer " . FIREBASE_API_KEY,
-            "Content-Type: application/octet-stream"
-        ]);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents($local_path));
-        curl_exec($ch);
-        curl_close($ch);
     }
 
     // Create user in Firebase Authentication
@@ -90,9 +71,7 @@ if (isset($_POST["register"])) {
             "birthdate" => $birthdate,
             "contact_info" => $contact,
             "gender" => $gender,
-            "photo_type" => $photo_type,
             "age" => $age,
-            "photo" => $photo_url,
             "email" => $email,
             "firebase_uid" => $firebase_uid
         ]);
@@ -108,14 +87,14 @@ if (isset($_POST["register"])) {
         // Insert into MySQL Database
         $sql = "INSERT INTO residents (resident_id, firstname, lastname, address, birthdate, contact_info, gender, photo_type, age, photo, created_on, email, password) 
                 VALUES ('$resident_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$photo_type', '$age', '$filename', NOW(), '$email', '$password')";
-        
+
         if ($conn->query($sql)) {
             $_SESSION["success"] = "Resident added successfully! Verification email sent.";
         } else {
             $_SESSION["error"] = "MySQL Error: " . $conn->error;
         }
 
-// Send email verification link
+        // Send email verification link
         $verify_url = "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=" . FIREBASE_API_KEY;
         $verify_data = json_encode([
             "requestType" => "VERIFY_EMAIL",
@@ -134,7 +113,7 @@ if (isset($_POST["register"])) {
     } else {
         $_SESSION["error"] = "Firebase Error: " . json_encode($auth_result["error"]);
     }
-    
+
     header("Location: register_residents.php");
     exit();
 }
@@ -143,185 +122,222 @@ include 'header.php';
 ?>
 
 <style>
-body {
-    padding-top: 0;
-    background-image: url("images/PaterosMunicipal.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    font-family: Arial, sans-serif;
-}
-
-p {
-    font-size: 14px;
-}
-
-#register_style {
-    font-size: x-small;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 12px;
-}
-
-label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: block;
-    color: #555;
-
-    margin-top: 10px;
-}
-
-input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"] {
-    width: 50%;
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-    text-align: center;
-    border-color: #45a049;
-}
-
-input[type="file"] {
-    margin-bottom: 5px;
-}
-
-input[type="submit"] {
-    width: 50%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-}
-
-.image img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-}
-
-.login-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-
-    background-image: 'images/PaterosMunicipal.jpg';
-}
-
-@media (max-width: 768px) {
-    input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"] {
-        width: 80%;
+    body {
+        padding-top: 0;
+        background-image: url("images/PaterosMunicipal.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        font-family: Arial, sans-serif;
     }
-}
 
-@media (max-width: 480px) {
-    input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="file"] {
+    p {
+        font-size: 14px;
+    }
+
+    #register_style {
+        font-size: x-small;
+    }
+
+    input {
         width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 12px;
     }
 
-    .login-container {
-        padding: 15px;
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+        color: #555;
+
+        margin-top: 10px;
     }
 
-    .image img {
-        width: 90%;
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="date"],
+    input[type="file"] {
+        width: 50%;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+        text-align: center;
+        border-color: #45a049;
+    }
+
+    input[type="file"] {
+        margin-bottom: 5px;
     }
 
     input[type="submit"] {
-        width: 100%;
+        width: 50%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
     }
-}
 
-.p-login-margin {
-  margin-bottom: 0;
-}
-div.alert.alert-success {
-    padding: 5px 10px 5px 10px;
-    background-color: green;
-    color: white;
-    font-size: 20px;
-}
-#alert-success {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#birthdate {
-    background-color: #f0f0f0;
-    color: #333;
-}
-select#photo_type {
-    width: 100%;
-    max-width: 280px;
-    padding: 12px 16px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    color: #333;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-select#photo_type:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0,123,255,0.5);
-    background-color: #fff;
-}
+    .reg {
+        width: 50%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .reg:hover {
+        background-color: #45a049;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .image img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 600px;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-top: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+
+        background-image: 'images/PaterosMunicipal.jpg';
+    }
+
+    @media (max-width: 768px) {
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"] {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+        }
+
+        .login-container {
+            padding: 15px;
+        }
+
+        .image img {
+            width: 90%;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+        }
+    }
+
+    .p-login-margin {
+        margin-bottom: 0;
+    }
+
+    div.alert.alert-success {
+        padding: 5px 10px 5px 10px;
+        background-color: green;
+        color: white;
+        font-size: 20px;
+    }
+
+    #alert-success {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #birthdate {
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    select#photo_type {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        color: #333;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    select#photo_type:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        background-color: #fff;
+    }
 </style>
+
 <body>
     <div class="container">
         <div class="login-container" id="register_style">
             <center>
-            <h1>Create Resident Account</h1>
-            <p>Fill in the details to create a new user account for resident.</p>
+                <h1>Create Resident Account</h1>
+                <p>Fill in the details to create a new user account for resident.</p>
             </center>
             <?php if (isset($_SESSION['error'])): ?>
                 <div class="alert alert-danger">
-                    <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                    <?php echo $_SESSION['error'];
+                    unset($_SESSION['error']); ?>
                 </div>
             <?php endif; ?>
             <?php if (isset($_SESSION['success'])): ?>
                 <div id="alert-success">
                     <div class="alert alert-success">
-                        <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                        <?php echo $_SESSION['success'];
+                        unset($_SESSION['success']); ?>
                     </div>
                 </div>
             <?php endif; ?>
-            <form id="registerForm" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <center>
                     <label for="firstname">First Name</label>
                     <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
@@ -369,15 +385,13 @@ select#photo_type:focus {
                     <label for="photo">Upload Photo</label>
                     <input type="file" id="photo" name="photo" accept="image/*" required>
 
-                    <input type="submit" name="register" value="Create Account">
+                    <button type="button" class="reg" id="startTimerBtn">Create Account</button>
+                    <input type="hidden" name="register" value="1">
+
+                    <p id="timerDisplay" style="font-size: 16px; font-weight: bold; color: red;"></p>
+
                 </center>
             </form>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const today = new Date().toISOString().split("T")[0];
-                    document.getElementById("birthdate").setAttribute("max", today);
-                });
-            </script>
 
             <center>
                 <p class="p-login-margin">Do you want to go back?</p>
@@ -387,40 +401,125 @@ select#photo_type:focus {
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("registerForm").addEventListener("submit", function (event) {
-                event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("birthdate").setAttribute("max", today);
 
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You are about to save resident data. This will take a few seconds to process.",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, proceed",
-                    cancelButtonText: "Cancel"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        let countdown = 360; 
-                        Swal.fire({
-                            title: "Processing...",
-                            html: `<b>${countdown}</b> seconds remaining...`,
-                            timer: 360000,
-                            timerProgressBar: true,
-                            allowOutsideClick: false,
-                            didOpen: () => {
-                                const timerInterval = setInterval(() => {
-                                    countdown--;
-                                    Swal.getHtmlContainer().innerHTML = `<b>${countdown}</b> seconds remaining...`;
-                                }, 1000);
-                                setTimeout(() => clearInterval(timerInterval), 360000);
-                            }
-                        }).then(() => {
-                            document.getElementById("registerForm").submit();
-                        });
-                    }
-                });
-            });
+    const startTimerBtn = document.getElementById("startTimerBtn");
+    const timerDisplay = document.getElementById("timerDisplay");
+    const form = document.querySelector("form");
+    const countdownKey = "registrationCountdownStart";
+    const countdownDuration = 10800; // Change to 10800 for 3 hours
+    const formStorageKey = "registrationFormData";
+    let countdownInterval;
+
+    const requiredFields = [
+        "firstname",
+        "lastname",
+        "age",
+        "birthdate",
+        "gender",
+        "address",
+        "email",
+        "contact",
+        "password",
+        "photo_type"
+    ];
+
+    // Save form data to localStorage
+    function saveFormData() {
+        const data = {};
+        requiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) data[id] = el.value;
         });
-    </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        localStorage.setItem(formStorageKey, JSON.stringify(data));
+    }
+
+    // Restore form data from localStorage
+    function restoreFormData() {
+        const savedData = JSON.parse(localStorage.getItem(formStorageKey) || "{}");
+        requiredFields.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && savedData[id]) {
+                el.value = savedData[id];
+            }
+        });
+    }
+
+    function startCountdown(startTime) {
+        countdownInterval = setInterval(() => {
+            const currentTime = Math.floor(Date.now() / 1000);
+            const timeElapsed = currentTime - startTime;
+            const timeLeft = countdownDuration - timeElapsed;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                localStorage.removeItem(countdownKey);
+                localStorage.removeItem(formStorageKey);
+                timerDisplay.textContent = "Registering resident...";
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            } else {
+                timerDisplay.textContent = `Account will undergo verification, make sure you upload a valid Pateros ID. We will notify you when your account is ready: ${timeLeft} seconds`;
+            }
+        }, 1000);
+    }
+
+    function validateFormFields() {
+        for (const id of requiredFields) {
+            const element = document.getElementById(id);
+            if (!element || element.value.trim() === "") {
+                return false;
+            }
+        }
+
+        const photo = document.getElementById("photo");
+        if (!photo || photo.files.length === 0) return false;
+
+        return true;
+    }
+
+    // Restore saved form data if available
+    restoreFormData();
+
+    // Add event listeners to save inputs on change
+    requiredFields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener("input", saveFormData);
+        }
+    });
+
+    // Resume countdown if already in progress
+    const savedStartTime = localStorage.getItem(countdownKey);
+    if (savedStartTime) {
+        const timeElapsed = Math.floor(Date.now() / 1000) - parseInt(savedStartTime);
+        if (timeElapsed < countdownDuration) {
+            startTimerBtn.disabled = true;
+            startCountdown(parseInt(savedStartTime));
+        } else {
+            localStorage.removeItem(countdownKey);
+            localStorage.removeItem(formStorageKey);
+        }
+    }
+
+    startTimerBtn.addEventListener("click", function () {
+        if (!validateFormFields()) {
+            alert("Please fill in all required fields before submitting.");
+            return;
+        }
+
+        const startTime = Math.floor(Date.now() / 1000);
+        localStorage.setItem(countdownKey, startTime);
+        startTimerBtn.disabled = true;
+        startCountdown(startTime);
+    });
+});
+</script>
+
+
+
+
 </body>
