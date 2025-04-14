@@ -66,7 +66,7 @@
                         <th>Remarks</th>
                         <th>Approval</th>
                         <th>Created at</th>
-                        <th>Edit</th>
+                        <th>Edit Remarks</th>
                         <th>Edit Approval</th>
                   </thead>
                   <tbody>

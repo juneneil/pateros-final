@@ -2,6 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
+session_start();
 include "conn.php";
 
 define("FIREBASE_API_KEY", "AIzaSyDXuS34OIspDbMFtYuU-DnRhwb3ilLNHts");
