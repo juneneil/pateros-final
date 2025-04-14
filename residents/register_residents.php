@@ -409,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const timerDisplay = document.getElementById("timerDisplay");
     const form = document.querySelector("form");
     const countdownKey = "registrationCountdownStart";
-    const countdownDuration = 10800; // Change to 10800 for 3 hours
+    const countdownDuration = 10; // Change to 10800 for 3 hours
     const formStorageKey = "registrationFormData";
     let countdownInterval;
 
