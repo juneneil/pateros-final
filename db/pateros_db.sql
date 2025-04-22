@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2025 at 08:44 PM
+-- Generation Time: Apr 22, 2025 at 09:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `admin_title`, `created_on`) VALUES
 (1, 'admin', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Final', 'Boss', 'PaterosLogo.png', 'Super Admin', '2025-02-17'),
 (2, 'admin2', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Civil', 'Registry', 'PaterosLogo.png', 'Civil Registry', '2025-02-17'),
-(3, 'admin3', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Business', 'Registration', 'PaterosLogo.png', 'Business Registration', '2025-02-17'),
+(3, 'admin3', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Business', 'Registration', 'PaterosLogo.png', 'Business Registratio', '2025-02-17'),
 (4, 'admin4', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'Job', 'Opportunities', 'PaterosLogo.png', 'Job Opportunities', '2025-02-17'),
 (5, 'admin5', '$2y$10$fCOiMky4n5hCJx3cpsG20Od4wHtlkCLKmO6VLobJNRIg9ooHTkgjK', 'DS', 'WD', 'PaterosLogo.png', 'DSWD', '2025-02-17');
 
@@ -149,6 +149,13 @@ CREATE TABLE `employees` (
   `password_changed` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `created_on`, `email`, `password`, `password_changed`) VALUES
+(53, 'PSX547983061', 'June Neil', 'Magnanao', 'Pio Del Pilar', '2025-04-07', '12334', 'Male', 1, 1, 'image.png', '2025-04-14', 'juneneilsiaomagnanao123@gmail.com', '4c7878dc5b115367709485160d358dfd', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -217,6 +224,8 @@ CREATE TABLE `residents` (
   `gender` varchar(10) NOT NULL,
   `photo_type` varchar(20) NOT NULL,
   `photo` varchar(200) NOT NULL,
+  `approval` varchar(15) DEFAULT NULL,
+  `selfie_with_id` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_on` timestamp NOT NULL DEFAULT current_timestamp()
@@ -226,10 +235,10 @@ CREATE TABLE `residents` (
 -- Dumping data for table `residents`
 --
 
-INSERT INTO `residents` (`id`, `resident_id`, `firstname`, `lastname`, `age`, `address`, `birthdate`, `contact_info`, `gender`, `photo_type`, `photo`, `email`, `password`, `created_on`) VALUES
-(4, 'IGK216473805', 'cc', 'cc', '22', 'cc', '2025-03-05', '22', 'Female', '', 'ano2.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
-(5, 'DZC267051394', 'ccss', 'ccss', '22', 'ccss', '2025-03-05', '22', 'Female', '', 'ano3.jpg', 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
-(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', '', 'ano4.jpg', 'resident@gmail.com', 'password', '2025-03-01 16:01:22');
+INSERT INTO `residents` (`id`, `resident_id`, `firstname`, `lastname`, `age`, `address`, `birthdate`, `contact_info`, `gender`, `photo_type`, `photo`, `approval`, `selfie_with_id`, `email`, `password`, `created_on`) VALUES
+(4, 'IGK216473805', 'cc', 'cc', '22', 'cc', '2025-03-05', '22', 'Female', '', 'ano2.jpg', 'Not Approved', NULL, 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
+(5, 'DZC267051394', 'ccss', 'ccss', '22', 'ccss', '2025-03-05', '22', 'Female', '', 'ano3.jpg', 'Approved', NULL, 'cc@gmail.com', 'cc', '2025-03-01 16:01:22'),
+(9, 'SVD793184256', 'xxss', 'xxss', '1111', 'xxss', '2025-03-11', '1111', 'Female', '', 'ano4.jpg', NULL, NULL, 'juneneilsiaomagnanao123@gmail.com', 'june123', '2025-03-01 16:01:22');
 
 -- --------------------------------------------------------
 
@@ -278,6 +287,19 @@ CREATE TABLE `ticket` (
   `remarks` varchar(255) NOT NULL DEFAULT 'not serve',
   `approval` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`id`, `resident_id`, `category`, `sub_category`, `reason_for_inquiry`, `voters_certificate`, `asesor_office`, `business_office`, `health_office`, `cedula`, `job_opportunities`, `police_clearance`, `dswd`, `created_at`, `booking_date`, `remarks`, `approval`) VALUES
+(20, 'SVD793184256', 'Civil Registry', 'Marriage Service', 'wew', '', '', '', '', '', '', '', '', '2025-04-13 13:55:57', '2025-04-14 10:55:00', 'Not Serve', 'Proceed to Payment'),
+(21, 'SVD793184256', 'Business Registration', 'Cedula', 'fff', '', '', '', '', '', '', '', '', '2025-04-13 13:57:30', '2025-04-14 09:57:00', 'Not Serve', 'Proceed to Payment'),
+(22, 'SVD793184256', 'Job Opportunities', 'Family Planning', 'asdasd', '', '', '', '', '', '', '', '', '2025-04-13 13:57:50', '2025-04-14 12:57:00', 'Not Serve', 'Not Approved'),
+(23, 'SVD793184256', 'DSWD', 'Business Renewal', 'hhh', '', '', '', '', '', '', '', '', '2025-04-13 13:58:12', '2025-04-17 14:57:00', 'Not Serve', 'Not Approved'),
+(24, 'SVD793184256', 'Civil Registry', 'Voters Certificate', 'asd', '', '', '', '', '', '', '', '', '2025-04-14 11:44:00', '2025-04-24 10:43:00', 'Not Serve', 'Not Approved'),
+(25, 'SVD793184256', 'DSWD', 'Birth Service', 'cccc', '', '', '', '', '', '', '', '', '2025-04-14 11:44:21', '2025-04-17 09:44:00', 'Not Serve', 'Not Approved'),
+(26, 'BCT387522308', 'Civil Registry', 'Voters Certificate', 'aaa', '', '', '', '', '', '', '', '', '2025-04-14 15:21:34', '2025-04-15 11:21:00', 'Not Serve', 'Not Approved');
 
 --
 -- Indexes for dumped tables
@@ -395,7 +417,7 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `employeeusers`
@@ -419,7 +441,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `residents`
 --
 ALTER TABLE `residents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `schedules`
@@ -431,7 +453,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables

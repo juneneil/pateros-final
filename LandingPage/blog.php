@@ -38,9 +38,6 @@
             <h3>
             Food to try in Pateros
             </h3>
-            <!-- <p>
-            Hello World
-            </p> -->
             <a href="#CallBack">
                 Read More
             </a>
@@ -66,9 +63,6 @@
             <h3>
             Fiesta of Pateros
             </h3>
-            <!-- <p>
-            Hello World
-            </p> -->
             <a href="#CallBack">
                 Read More
             </a>

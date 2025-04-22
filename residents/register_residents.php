@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "../conn.php";
 $pageTitle = "Create Resident";
 $WithEmployeeCSS = false;
@@ -84,9 +83,32 @@ if (isset($_POST["register"])) {
         curl_exec($db_ch);
         curl_close($db_ch);
 
+        $selfie_filename = '';
+        if (!empty($_POST['selfie_with_id'])) {
+            $base64_image = $_POST['selfie_with_id'];
+            if (preg_match('/^data:image\/(\w+);base64,/', $base64_image, $type)) {
+                $base64_image = substr($base64_image, strpos($base64_image, ',') + 1);
+                $type = strtolower($type[1]);
+                if (!in_array($type, ['jpg', 'jpeg', 'png'])) {
+                    $_SESSION["error"] = "Only JPG, JPEG, or PNG images are allowed.";
+                    header("Location: register_residents.php");
+                    exit();
+                }
+                $base64_image = base64_decode($base64_image);
+                if ($base64_image === false) {
+                    $_SESSION["error"] = "Base64 decode failed.";
+                    header("Location: register_residents.php");
+                    exit();
+                }
+                $selfie_filename = 'selfie_' . uniqid() . '.' . $type;
+                $file_path = '../images/' . $selfie_filename;
+                file_put_contents($file_path, $base64_image);
+            }
+        }
+
         // Insert into MySQL Database
-        $sql = "INSERT INTO residents (resident_id, firstname, lastname, address, birthdate, contact_info, gender, photo_type, age, photo, created_on, email, password) 
-                VALUES ('$resident_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$photo_type', '$age', '$filename', NOW(), '$email', '$password')";
+        $sql = "INSERT INTO residents (resident_id, firstname, lastname, address, birthdate, contact_info, gender, photo_type, age, photo, created_on, email, password, selfie_with_id) 
+                VALUES ('$resident_id', '$firstname', '$lastname', '$address', '$birthdate', '$contact', '$gender', '$photo_type', '$age', '$filename', NOW(), '$email', '$password', '$selfie_filename')";
 
         if ($conn->query($sql)) {
             $_SESSION["success"] = "Resident added successfully! Verification email sent.";
@@ -382,6 +404,108 @@ include 'header.php';
                         <option value="SSS">SSS</option>
                     </select>
 
+                    <label onclick="openCamera()" class="photo-btn">📸 Take a photo of yourself holding your ID</label>
+                    <style>
+                    .photo-btn {
+                        display: inline-block;
+                        padding: 10px 20px;
+                        background-color: #007bff;
+                        color: white;
+                        font-weight: 500;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        transition: background-color 0.3s, transform 0.2s;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                        user-select: none;
+                        text-align: center;
+                    }
+                    .photo-btn:hover {
+                        background-color: #0056b3;
+                        transform: scale(1.02);
+                    }
+                    .media-wrapper {
+                        width: 100%;
+                        max-width: 540px;
+                        margin-top: 10px;
+                    }
+                    video, canvas {
+                        width: 100%;
+                        height: auto;
+                        border: 2px solid #ccc;
+                        border-radius: 8px;
+                        display: block;
+                    }
+                    button {
+                        margin-top: 10px;
+                        margin-right: 10px;
+                        padding: 8px 16px;
+                        border-radius: 6px;
+                        border: none;
+                        background-color: #007bff;
+                        color: white;
+                        cursor: pointer;
+                    }
+                    button:hover {
+                        background-color: #0056b3;
+                    }
+                    @media only screen and (max-width: 600px) {
+                        .media-wrapper {
+                            max-width: 100%;
+                        }
+                    }
+                    </style>
+                    <div id="cameraSection" style="display: none;">
+                        <div class="media-wrapper">
+                            <video id="camera" autoplay playsinline></video>
+                            <canvas id="snapshot" style="display: none;"></canvas>
+                        </div>
+                        <button type="button" onclick="takeSnapshot()" id="captureBtn">📷 Capture</button>
+                        <button type="button" onclick="retakePhoto()" id="retakeBtn" style="display: none;">🔁 Retake</button>
+                        <input type="hidden" name="selfie_with_id" id="photoData">
+                    </div>
+                    <script>
+                    let videoStream;
+                    function openCamera() {
+                        document.getElementById('cameraSection').style.display = 'block';
+                        navigator.mediaDevices.getUserMedia({
+                            video: { width: { ideal: 1280 }, height: { ideal: 720 } }
+                        })
+                        .then(function(stream) {
+                            videoStream = stream;
+                            const video = document.getElementById('camera');
+                            video.srcObject = stream;
+                            video.onloadedmetadata = () => video.play();
+                        })
+                        .catch(function(err) {
+                            alert("Unable to access camera: " + err);
+                        });
+                    }
+                    function takeSnapshot() {
+                        const video = document.getElementById('camera');
+                        const canvas = document.getElementById('snapshot');
+                        const context = canvas.getContext('2d');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        canvas.style.display = 'block';
+                        video.style.display = 'none';
+                        document.getElementById('retakeBtn').style.display = 'inline-block';
+                        document.getElementById('captureBtn').style.display = 'none';
+                        document.getElementById('photoData').value = canvas.toDataURL('image/png', 1.0);
+                    }
+                    function retakePhoto() {
+                        const canvas = document.getElementById('snapshot');
+                        const video = document.getElementById('camera');
+                        const context = canvas.getContext('2d');
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                        canvas.style.display = 'none';
+                        video.style.display = 'block';
+                        document.getElementById('retakeBtn').style.display = 'none';
+                        document.getElementById('captureBtn').style.display = 'inline-block';
+                        document.getElementById('photoData').value = '';
+                    }
+                    </script>
+
                     <label for="photo">Upload Photo</label>
                     <input type="file" id="photo" name="photo" accept="image/*" required>
 
@@ -389,7 +513,6 @@ include 'header.php';
                     <input type="hidden" name="register" value="1">
 
                     <p id="timerDisplay" style="font-size: 16px; font-weight: bold; color: red;"></p>
-
                 </center>
             </form>
 

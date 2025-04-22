@@ -63,23 +63,12 @@ include 'header.php';
     <?php include 'navbar.php'; ?>
     <div class="container mycontainer" id="welcomeDashboard">
     <div class="row">
-        <!-- Resident ID -->
-        <!-- <div class="col-12 col-md-6 mb-4">
-            <div class="section-box p-4 bg-light rounded shadow h-100">
-                <h5 class="section-title">Resident ID</h5>
-                <?php /* echo $_SESSION['resident_id']; */ ?>
-            </div>
-        </div> -->
-
-        <!-- Full Name -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Full Name</h5>
                 <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?>
             </div>
         </div>
-
-        <!-- Email -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Email Address</h5>
@@ -88,32 +77,24 @@ include 'header.php';
                 </div>
             </div>
         </div>
-
-        <!-- Phone -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Phone Number</h5>
                 <?php echo $contact_info; ?>
             </div>
         </div>
-
-        <!-- Address -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Location Address</h5>
                 <?php echo $address; ?>
             </div>
         </div>
-
-        <!-- Gender -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Gender</h5>
                 <?php echo $gender; ?>
             </div>
         </div>
-
-        <!-- Account Created -->
         <div class="col-12 col-md-6 mb-4">
             <div class="section-box p-4 bg-light rounded shadow h-100">
                 <h5 class="section-title">Account Created</h5>
@@ -126,4 +107,3 @@ include 'header.php';
     <br>
     <?php include 'footer.php'; ?>
 </body>
-

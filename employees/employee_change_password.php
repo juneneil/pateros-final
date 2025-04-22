@@ -1,44 +1,4 @@
 <?php
-// $pageTitle = "Change Password";
-// $WithEmployeeCSS = True;
-// session_start();
-// if (!isset($_SESSION["user_id"])) {
-//     header("Location: index.php");
-//     exit();
-// }
-// $user_id = $_SESSION["user_id"];
-// $current_password = $_SESSION["lastname"];
-// include "../conn.php";
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     if (isset($_POST["new_password"])) {
-//         $new_password = $_POST["new_password"];
-//         $confirm_password = $_POST["confirm_password"];
-//         if ($new_password === $confirm_password) {
-//             if ($new_password !== $current_password) {
-//                 $sql = "UPDATE employees SET password = ?, password_changed = 1 WHERE id = ?";
-//                 $stmt = $conn->prepare($sql);
-//                 $stmt->bind_param("si", $new_password, $user_id);
-//                 if ($stmt->execute()) {
-//                     echo json_encode(["success" => true]);
-//                     exit();
-//                 } else {
-//                     echo json_encode(["error" => "Failed to update password. Please try again."]);
-//                     exit();
-//                 }
-//             } else {
-//                 echo json_encode(["error" => "New password cannot be the same as the default password (lastname)."]);
-//                 exit();
-//             }
-//         } else {
-//             echo json_encode(["error" => "Passwords do not match. Please try again."]);
-//             exit();
-//         }
-//     }
-// }
-// include 'header.php';
-?>
-
-<?php
 $pageTitle = "Change Password";
 $WithEmployeeCSS = True;
 session_start();
@@ -53,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["new_password"]) && isset($_POST["confirm_password"])) {
         $new_password = $_POST["new_password"];
         $confirm_password = $_POST["confirm_password"];
-
         if ($new_password === $confirm_password) {
             if ($new_password !== $current_password) {
                 $hashed_password = md5($new_password);
@@ -190,7 +149,6 @@ button.btn-primary:active::after {
 }
 
 </style>
-
 <canvas id="confettiCanvas"></canvas>
 <div class="container">
     <div class="image">

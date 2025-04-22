@@ -1,7 +1,5 @@
 <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="<?php echo (!empty($user['photo'])) ? '../images/'.$user['photo'] : '../images/profile.jpg'; ?>" class="img-circle" alt="User Image">
@@ -11,7 +9,6 @@
           <a><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree" style="margin-top: 4%;">
         <li class="header" style="color: white; font-weight: bold;">REPORTS</li>
         <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -28,8 +25,6 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="employee.php"><i class="fa fa-circle-o"></i> Employee List</a></li>
-            <!-- <li><a href="overtime.php"><i class="fa fa-circle-o"></i> Overtime</a></li>
-            <li><a href="cashadvance.php"><i class="fa fa-circle-o"></i> Cash Advance</a></li> -->
             <li><a href="schedule.php"><i class="fa fa-circle-o"></i> Schedules</a></li>
           </ul>
         </li>
@@ -45,13 +40,11 @@
             <li><a href="resident.php"><i class="fa fa-circle-o"></i>Resident List</a></li>
           </ul>
         </li>
-        <!-- <li><a href="ticket.php"><i class="fa fa-file-text"></i> Ticket</a></li> -->
-        <!-- <li><a href="deduction.php"><i class="fa fa-file-text"></i> Deductions</a></li> -->
         <li><a href="position.php"><i class="fa fa-suitcase"></i> Positions</a></li>
         <li class="header" style="color: white; font-weight: bold;">PRINTABLES</li>
         <li><a href="tickets.php"><i class="fa fa-files-o"></i> <span>Tickets</span></a></li>
         <li><a href="schedule_employee.php"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
       </ul>
     </section>
-    <!-- /.sidebar -->
   </aside>
+  

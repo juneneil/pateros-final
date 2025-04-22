@@ -57,7 +57,10 @@
                     <th>Contact Info</th>
                     <th>Gender</th>
                     <th>Email</th>
+                    <th>Approval</th>
+                    <th>Photo ID</th>
                     <th>Created at</th>
+                    <th>Approval Edit</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </thead>
@@ -84,7 +87,19 @@
                             <td><?php echo $row['contact_info']; ?></td>
                             <td><?php echo $row['gender']; ?></td>
                             <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $row['approval']; ?></td>
+                            <td>
+                              <a href="javascript:void(0);" class="photo" data-id="<?php echo $row['empid']; ?>" data-photo="<?php echo (!empty($row['selfie_with_id']))? '../images/'.$row['selfie_with_id']:'../images/profile.jpg'; ?>" data-firstname="<?php echo $row['firstname']; ?>">
+                                <img src="<?php echo (!empty($row['selfie_with_id']))? '../images/'.$row['selfie_with_id']:'../images/profile.jpg'; ?>" width="40px" height="35px" style="cursor: pointer;">
+                              </a>
+                              <a href="javascript:void(0);" class="pull-right photo" data-id="<?php echo $row['empid']; ?>" data-photo="<?php echo (!empty($row['selfie_with_id']))? '../images/'.$row['selfie_with_id']:'../images/profile.jpg'; ?>" data-firstname="<?php echo $row['firstname']; ?>">
+                                <span class="fa fa-eye"></span>
+                              </a>
+                            </td>
                             <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
+                            <td>
+                              <button class="btn btn-success btn-sm approval btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-approval"></i> Approval</button>
+                            </td>
                             <td>
                               <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['empid']; ?>"><i class="fa fa-edit"></i> Edit</button>
                             </td>
@@ -139,6 +154,13 @@ $(function(){
 });
 
 $(function(){
+  $('.approval').click(function(e){
+    e.preventDefault();
+    $('#approval').modal('show');
+    var id = $(this).data('id');
+    getRow(id);
+  });
+
   $('.edit').click(function(e){
     e.preventDefault();
     $('#edit').modal('show');
@@ -181,6 +203,7 @@ function getRow(id){
       $('#gender_val').val(response.gender);
       $('#edit_photo').val(response.photo);
       $('#edit_empid').val(response.empid);
+      $('#edit_approval').val(response.empid);
     }
   });
 }
